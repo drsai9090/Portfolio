@@ -2,10 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sai Sugun D R - Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
@@ -13,137 +17,209 @@
             background-color: #121212;
             color: #fff;
             text-align: center;
+            overflow-x: hidden;
+            position: relative;
         }
+
+        /* Background effect container */
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Overlay to improve readability */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(18, 18, 18, 0.8);
+            z-index: -1;
+        }
+
+        /* Header */
         header {
             background: linear-gradient(90deg, #ff8c00, #ff2d55);
-            padding: 20px;
-            box-shadow: 0px 4px 10px rgba(255, 140, 0, 0.5);
+            padding: 40px;
+            font-size: 24px;
+            animation: fadeIn 2s ease-in-out;
+            font-family: 'Orbitron', sans-serif;
         }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glitch effect for name */
+        .name-container {
             display: flex;
-            justify-content: center;
-            background: #222;
-            padding: 10px;
-            box-shadow: 0px 4px 10px rgba(255, 140, 0, 0.5);
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #ff8c00;
+            flex-direction: column;
+            align-items: center;
+            font-size: 48px;
             font-weight: bold;
-            transition: color 0.3s;
+            text-transform: uppercase;
+            position: relative;
+            color: #000000;
+            font-family: 'Orbitron', sans-serif;
         }
-        nav ul li a:hover {
-            color: #ff2d55;
-        }
-        section {
-            padding: 50px;
-        }
-        h2 {
-            border-bottom: 2px solid #ff8c00;
+
+        .glitch {
+            position: relative;
             display: inline-block;
-            padding-bottom: 5px;
-            transition: all 0.3s ease-in-out;
         }
-        h2:hover {
-            color: #ff2d55;
-            border-bottom: 2px solid #ff2d55;
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.8;
         }
-        a {
-            color: #ff8c00;
-            transition: color 0.3s;
+
+        .glitch::before {
+            color: #ffffff;
+            transform: translate(-3px, -3px);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 45%, 0% 45%);
+            animation: glitch 0.5s infinite linear alternate-reverse;
         }
-        a:hover {
-            color: #ff2d55;
+
+        .glitch::after {
+            color: #ffffff;
+            transform: translate(3px, 3px);
+            clip-path: polygon(0% 55%, 100% 55%, 100% 100%, 0% 100%);
+            animation: glitch 0.5s infinite linear alternate-reverse;
         }
-        footer {
-            background-color: #222;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            font-size: 14px;
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            100% { transform: translate(2px, -2px); }
         }
-        ul {
-            padding: 0;
-        }
-        ul li {
-            list-style: none;
-            padding: 10px;
-            background: #1e1e1e;
-            margin: 10px auto;
-            width: 80%;
-            border-radius: 10px;
+
+        /* Section containers */
+        .section-container {
+            position: relative;
+            z-index: 2;
+            max-width: 80%;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
             transition: transform 0.3s;
         }
-        ul li:hover {
-            transform: scale(1.05);
-            background: #ff8c00;
-            color: #121212;
+
+        .section-container:hover {
+            transform: scale(1.03);
+            background: rgba(255, 140, 0, 0.2);
         }
+
+        h2 {
+            border-bottom: 3px solid #ff8c00;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        /* Download CV button */
         .download-cv {
-            margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background: #ff8c00;
-            color: #121212;
+            color: white;
             text-decoration: none;
             font-weight: bold;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
+            display: inline-block;
         }
+
         .download-cv:hover {
             background: #ff2d55;
-            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #ff2d55;
+        }
+
+        /* Links styling */
+        .projects-list a {
+            display: block;
+            padding: 10px;
+            font-size: 18px;
+            color: #ff8c00;
+            text-decoration: none;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        .projects-list a:hover {
+            color: #ff2d55;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px #ff2d55;
+        }
     </style>
 </head>
 <body>
+    <div id="vanta-bg"></div> <!-- Background Effect -->
+    <div class="overlay"></div> <!-- Semi-transparent overlay -->
+
     <header>
-        <h1>Sai Sugun D R</h1>
+        <div class="name-container">
+            <div class="glitch" data-text="Sai">Sai</div>
+            <div class="glitch" data-text="Sugun D R">Sugun D R</div>
+        </div>
         <p>MSc Information Systems | Software Developer | Data Analyst</p>
     </header>
-    <nav>
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-    <section id="about">
+
+    <section id="about" class="section-container">
         <h2>About Me</h2>
-        <p>Early-career professional with expertise in information systems, data science, distributed systems, and software development. Passionate about technology, research, and astrophysics.</p>
+        <p>Early-career professional with expertise in information systems, data science, and distributed systems. Passionate about technology, research, and astrophysics.</p>
+        <p><strong>Internships:</strong> Data Science Intern at Oasis Infobyte, Power BI Intern at PwC Switzerland, British Airways on Forage.</p>
         <a href="Sai Sugun D R CV.pdf" class="download-cv" download>Download CV</a>
     </section>
-    <section id="education">
+<section id="education" class="section-container">
         <h2>Education</h2>
         <p><strong>MSc Information Systems</strong> - University College Dublin, Ireland (2025)</p>
         <p><strong>B.Eng Computer Science</strong> - Visvesvaraya Technological University, India (2023)</p>
     </section>
-    <section id="projects">
+
+
+    <section id="projects" class="section-container">
         <h2>Projects</h2>
-        <ul>
-            <li><a href="https://github.com/Saisugun9090/Stigma-Health-Records-Blockchain" target="_blank">Confidential Health Records using Blockchain</a></li>
-            <li><a href="https://github.com/Saisugun9090/Load-and-Code-Balancing-Usability-and-Workload-in-Voice-Mode" target="_blank">Workload and Usability in Voice Interfaces</a></li>
-            <li><a href="https://github.com/Saisugun9090/Emotion-Detection-in-Text-An-Experiment-with-Twitter-Data" target="_blank">Emotion Detection in Text</a></li>
-        </ul>
+        <div class="projects-list">
+            <a href="#">Confidential Health Records using Blockchain</a>
+            <a href="#">Workload and Usability in Voice Interfaces</a>
+            <a href="#">Emotion Detection in Text</a>
+        </div>
     </section>
-    <section id="skills">
+<section id="skills" class="section-container">
         <h2>Skills</h2>
-        <p>Python, Java, JavaScript, SQL, Git, Machine Learning, Data Analysis, UI/UX Design</p>
+        <p>Python, Java, JavaScript, SQL, Git, Machine Learning, Power BI, Data Visualization</p>
     </section>
-    <section id="contact">
+    <section id="contact" class="section-container">
         <h2>Contact</h2>
         <p>Email: <a href="mailto:sai.dolavaykotapalliramu@ucdconnect.ie">sai.dolavaykotapalliramu@ucdconnect.ie</a></p>
-        <p>LinkedIn: <a href="https://linkedin.com/in/sai-sugun-d-r" target="_blank">linkedin.com/in/sai-sugun-d-r</a></p>
-        <p>GitHub: <a href="https://github.com/Saisugun9090" target="_blank">github.com/Saisugun9090</a></p>
+        <p>LinkedIn: <a href="#">linkedin.com/in/sai-sugun-d-r</a></p>
+        <p>GitHub: <a href="#">github.com/Saisugun9090</a></p>
     </section>
+
     <footer>
         <p>&copy; 2025 Sai Sugun D R. All rights reserved.</p>
     </footer>
+
+    <script>
+        VANTA.NET({
+            el: "#vanta-bg",
+            backgroundColor: 0x121212,
+            color: 0xff8c00,
+            points: 12,
+            maxDistance: 25,
+            spacing: 18,
+            showDots: true,
+            dotColor: 0xff2d55
+        });
+    </script>
 </body>
 </html>
