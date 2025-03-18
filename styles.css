@@ -1,0 +1,625 @@
+/* Reset and General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a1a2e;
+    color: #e6e6e6;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header (unchanged) */
+header {
+    background-color: #0f0f1a;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: #ffd700;
+}
+
+header .tagline {
+    font-size: 1.1rem;
+    color: #b0b0b0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu li a {
+    color: #e6e6e6;
+    text-decoration: none;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.nav-menu li a:hover {
+    color: #ffd700;
+}
+
+.hamburger {
+    display: none;
+    font-size: 2rem;
+    color: #ffd700;
+    cursor: pointer;
+}
+
+/* Hero Section (updated to fix Jupiter movement) */
+.hero {
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1200x800?cosmos');
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.starfield {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.nebula {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.2), rgba(139, 0, 139, 0.1), transparent);
+    top: 30%;
+    left: 25%;
+    animation: nebulaPulse 15s infinite;
+    z-index: 2;
+}
+
+@keyframes nebulaPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.2); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+.jupiter {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, #d8a47f 40%, #8b5a2b 70%);
+    border-radius: 50%;
+    top: 15%; /* Starting position */
+    left: 10%; /* Starting position */
+    animation: orbitJupiter 25s infinite linear, rotate 10s infinite linear; /* Dual animations */
+    transform-origin: center;
+    z-index: 3;
+}
+
+.red-spot {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background-color: #ff4500;
+    border-radius: 50%;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+}
+
+.data-orbit {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    animation: dataSpin 5s infinite linear;
+}
+
+.data1 { top: -20px; left: 50%; animation-delay: 0s; }
+.data2 { top: 50%; left: -20px; animation-delay: 2s; }
+.data3 { top: 50%; left: 100%; animation-delay: 1s; }
+
+@keyframes orbitJupiter {
+    0% { top: 15%; left: 10%; } /* Start position */
+    25% { top: 30%; left: 40%; } /* Move right and down */
+    50% { top: 15%; left: 70%; } /* Peak right */
+    75% { top: 0%; left: 40%; } /* Move up and left */
+    100% { top: 15%; left: 10%; } /* Back to start */
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes dataSpin {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+.saturn {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, #d4a017 40%, #8b6914 70%);
+    border-radius: 50%;
+    top: 60%;
+    left: 70%;
+    animation: orbitSaturn 30s infinite linear;
+    z-index: 3;
+}
+
+.rings {
+    position: absolute;
+    width: 120px;
+    height: 20px;
+    background: linear-gradient(90deg, rgba(255, 215, 0, 0.8), rgba(139, 105, 20, 0.8));
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: ringPulse 3s infinite;
+}
+
+@keyframes orbitSaturn {
+    0% { top: 60%; left: 70%; }
+    25% { top: 80%; left: 30%; }
+    50% { top: 60%; left: 0%; }
+    75% { top: 40%; left: 30%; }
+    100% { top: 60%; left: 70%; }
+}
+
+@keyframes ringPulse {
+    0% { opacity: 0.8; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) rotate(45deg) scale(1.05); }
+    100% { opacity: 0.8; transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+}
+
+.comet {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #00b7eb;
+    border-radius: 50%;
+    top: 10%;
+    left: 100%;
+    animation: cometStreak 8s infinite linear;
+    z-index: 3;
+}
+
+.comet::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #00b7eb, transparent);
+    top: 50%;
+    left: -100px;
+    transform: translateY(-50%);
+}
+
+@keyframes cometStreak {
+    0% { transform: translateX(0); opacity: 1; }
+    80% { transform: translateX(-1500px); opacity: 1; }
+    81% { opacity: 0; }
+    100% { transform: translateX(0); opacity: 0; }
+}
+
+.dashboard {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background: rgba(255, 215, 0, 0.2);
+    border: 2px dashed #ffd700;
+    border-radius: 10px;
+    top: 70%;
+    left: 20%;
+    animation: dashboardPulse 4s infinite;
+    z-index: 3;
+}
+
+@keyframes dashboardPulse {
+    0% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.05); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 0.5; }
+}
+
+.hero .container {
+    position: relative;
+    z-index: 4;
+}
+
+.hero-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: bounceIn 1.5s forwards;
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: translateY(-50px); }
+    60% { opacity: 1; transform: translateY(10px); }
+    80% { transform: translateY(-5px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffd700;
+    color: #1a1a2e;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #e6c200;
+}
+
+/* Section Styles */
+.section {
+    padding: 60px 0;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ffd700;
+    text-align: center;
+}
+
+/* About Section (unchanged) */
+.about-content {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.about-text {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: fadeZoom 1s forwards;
+}
+
+@keyframes fadeZoom {
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Education Timeline (unchanged) */
+.education-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.education-card {
+    background-color: #0f0f1a;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateX(-50px);
+    animation: slideIn 0.8s forwards;
+}
+
+@keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.education-card h4 {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.education-card p {
+    margin-bottom: 5px;
+}
+
+.education-card span {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+}
+
+/* Projects Section (unchanged) */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background-color: #0f0f1a;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.2s; }
+.project-card:nth-child(2) { animation-delay: 0.4s; }
+.project-card:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.project-card p {
+    margin-bottom: 20px;
+}
+
+/* Skills Section (unchanged) */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.technical-skills h3, .soft-skills h3, .language-skills h3 {
+    font-size: 1.5rem;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+.skill-bar {
+    margin-bottom: 15px;
+}
+
+.skill-bar span {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bar {
+    background-color: #0f0f1a;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background-color: #ffd700;
+    animation: fillBar 1.5s ease-in-out forwards;
+}
+
+@keyframes fillBar {
+    from { width: 0; }
+    to { width: var(--width); }
+}
+
+.soft-skills .skill-item {
+    background-color: #0f0f1a;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.soft-skills .skill-item:hover {
+    transform: scale(1.05);
+    background-color: #ffd700;
+    color: #1a1a2e;
+}
+
+.flip-card {
+    width: 100px;
+    height: 100px;
+    margin: 10px auto;
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.flip-card-front {
+    background-color: #0f0f1a;
+    color: #e6e6e6;
+}
+
+.flip-card-back {
+    background-color: #ffd700;
+    color: #1a1a2e;
+    transform: rotateY(180deg);
+}
+
+/* Contact Section (unchanged) */
+#contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto 30px;
+}
+
+#contact input, #contact textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0f0f1a;
+    color: #e6e6e6;
+}
+
+#contact textarea {
+    height: 100px;
+    resize: none;
+}
+
+.social-links a {
+    color: #ffd700;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* Footer (unchanged) */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #0f0f1a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #0f0f1a;
+        padding: 20px;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu li {
+        margin: 10px 0;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+    }
+
+    .jupiter {
+        width: 60px;
+        height: 60px;
+    }
+
+    .red-spot {
+        width: 20px;
+        height: 25px;
+    }
+
+    .data-orbit {
+        width: 8px;
+        height: 8px;
+    }
+
+    @keyframes orbitJupiter {
+        0% { top: 15%; left: 10%; }
+        25% { top: 30%; left: 40%; }
+        50% { top: 15%; left: 70%; }
+        75% { top: 0%; left: 40%; }
+        100% { top: 15%; left: 10%; }
+    }
+
+    .saturn {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rings {
+        width: 80px;
+        height: 15px;
+    }
+
+    @keyframes orbitSaturn {
+        0% { top: 60%; left: 70%; }
+        25% { top: 80%; left: 30%; }
+        50% { top: 60%; left: 0%; }
+        75% { top: 40%; left: 30%; }
+        100% { top: 60%; left: 70%; }
+    }
+
+    .comet {
+        width: 10px;
+        height: 10px;
+    }
+
+    .comet::after {
+        width: 50px;
+    }
+
+    @keyframes cometStreak {
+        0% { transform: translateX(0); opacity: 1; }
+        80% { transform: translateX(-800px); opacity: 1; }
+        81% { opacity: 0; }
+        100% { transform: translateX(0); opacity: 0; }
+    }
+
+    .dashboard {
+        width: 150px;
+        height: 75px;
+    }
+}
