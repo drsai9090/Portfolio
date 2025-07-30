@@ -8,8 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Header (unchanged) -->
-    <header>
+    <!-- Floating Resume Planet Button -->
+    <button id="resume-planet" onclick="window.open('SAI SUGUN D R ATSF CV.pdf')">🪐 Download CV</button>
+
+    <!-- Header -->
+    <header class="navbar">
         <div class="container">
             <h1>Sai Sugun D R</h1>
             <p class="tagline">Exploring data science, web, blockchain, and the universe.</p>
@@ -21,10 +24,12 @@
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
-            </div>
-        </header>
+                <button id="dark-toggle">🌙</button>
+            </nav>
+        </div>
+    </header>
 
-    <!-- Hero Section (updated with data elements) -->
+    <!-- Hero Section -->
     <section class="hero">
         <canvas id="starfield" class="starfield"></canvas>
         <div class="nebula"></div>
@@ -47,18 +52,12 @@
         </div>
     </section>
 
-    <!-- About Section (unchanged) -->
+    <!-- About Section -->
     <section id="about" class="section">
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
-                <p class="about-text">Hi there 👋 I'm Sai Sugun — a curious human running on Python, Power BI, and popcorn. Currently orbiting around MSc in Information Systems at UCD, I spend my nights wondering why machine learning models need negative data to learn (and why humans don’t).
-
-I’ve built websites, dashboards, blockchain apps, and once even tried to train a machine to understand sarcasm. (Still working on that.)
-
-When I’m not debugging, I’m probably staring at the stars, planning a space-themed talk, or organizing something that includes snacks.
-
-If you're reading this far, maybe you're as curious as I am. Let’s connect — or build something interstellar.</p>
+                <p class="about-text">Hi there 👋 I'm Sai Sugun — a curious human running on Python, Power BI, and popcorn... Let’s connect — or build something interstellar.</p>
             </div>
             <h3>Education</h3>
             <div class="education-timeline">
@@ -76,31 +75,34 @@ If you're reading this far, maybe you're as curious as I am. Let’s connect —
         </div>
     </section>
 
-    <!-- Projects Section (unchanged) -->
+    <!-- Projects Section (hover & tags added) -->
     <section id="projects" class="section">
         <div class="container">
             <h2>Projects</h2>
             <div class="project-grid">
-                <div class="project-card">
+                <div class="project-card" data-tags="#Python #Blockchain">
                     <h3>Blockchain Health Records</h3>
-                    <p>Led a team to develop a blockchain-based system for secure storage of health records for stigma-diseased patients using Python and SHA-2. Sponsored by KSCST.</p>
+                    <p>Led a team to develop a blockchain-based system using Python and SHA-2.</p>
+                    <span class="tags">#Python #Blockchain</span>
                     <a href="https://doi.org/10.48175/IJARSCT-10600" target="_blank" class="btn">View Publication</a>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-tags="#PowerBI #DataViz">
                     <h3>British Airways Data Analysis</h3>
-                    <p>Analyzed aviation data as part of a PowerBI internship with British Airways on Forage, creating insights into customer trends and operational performance.</p>
+                    <p>Analyzed aviation data using PowerBI.</p>
+                    <span class="tags">#PowerBI #DataViz</span>
                     <a href="https://github.com/Saisugun9090/BA-Data-analysis" target="_blank" class="btn">View on GitHub</a>
                 </div>
-                <div class="project-card">
-                    <h3>PwC Data Visualization using PowerBI</h3>
-                    <p>Developed interactive dashboards to visualize complex datasets during a PowerBI internship with PwC Switzerland on Forage, focusing on user-friendly insights.</p>
+                <div class="project-card" data-tags="#PowerBI #Business">
+                    <h3>PwC Data Visualization</h3>
+                    <p>Created dashboards with PwC Switzerland using PowerBI.</p>
+                    <span class="tags">#PowerBI #Business</span>
                     <a href="https://github.com/Saisugun9090/PWC-PowerBI" target="_blank" class="btn">View on GitHub</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section (unchanged) -->
+    <!-- Skills Section with Star Ratings -->
 <section id="skills" class="section">
         <div class="container">
             <h2>Skills</h2>
@@ -128,7 +130,6 @@ If you're reading this far, maybe you're as curious as I am. Let’s connect —
                         <div class="bar"><div class="progress" style="width: 75%;"></div></div>
                     </div>
                 </div>
-
                 <div class="soft-skills">
                     <h3>Soft Skills</h3>
                     <div class="skill-item">Public Speaking</div>
@@ -163,26 +164,21 @@ If you're reading this far, maybe you're as curious as I am. Let’s connect —
         </div>
     </section>
 
-    <!-- Contact Section (unchanged) -->
-    <section id="contact" class="section">
+    <!-- Now Playing Section -->
+    <section id="now-playing" class="section">
         <div class="container">
-            <h2>Contact Me</h2>
-            <form id="contact-form">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-            <p>Email: <a href="mailto:sai.dolavavkotaoalliramu@ucdconnect.ie">sai.dolavavkotaoalliramu@ucdconnect.ie</a></p>
-            <p>Phone: +353 894 910 923 | +91 935 329 5650</p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/sai-sugun-d-r" target="_blank">LinkedIn</a>
-                <a href="https://github.com/Saisugun9090" target="_blank">GitHub</a>
-            </div>
+            <h2>Now Playing</h2>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/your_playlist_id" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
     </section>
 
-    <!-- Footer (unchanged) -->
+    <!-- Contact Section -->
+    <section id="contact" class="section">...</section>
+
+    <!-- Easter Egg -->
+    <div id="easter-egg" title="Click me!">🚀</div>
+
+    <!-- Footer -->
     <footer>
         <p>Designed by Sai Sugun D R | © 2025</p>
     </footer>
