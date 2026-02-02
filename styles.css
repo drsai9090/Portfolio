@@ -8,7 +8,7 @@
 
 * { box-sizing: border-box; }
 
-body {
+body { 
     margin: 0; padding: 20px;
     background-color: var(--paper-aged);
     font-family: 'Libre Baskerville', serif;
