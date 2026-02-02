@@ -3,211 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sai Sugun D R - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>The Sai Sugun Times | Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Floating Resume Planet Button -->
-    <button id="resume-planet" onclick="window.open('SAI SUGUN D R ATSF CV.pdf')">🪐 Download CV</button>
 
-    <!-- Header -->
-    <header class="navbar">
-        <div class="container">
-            <h1>Sai Sugun D R</h1>
-            <p class="tagline">Exploring data science, web, blockchain, and the universe.</p>
-            <nav>
-                <div class="hamburger">☰</div>
-                <ul class="nav-menu">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+<div class="broadsheet-wrapper">
+    <div class="top-bar">
+        <span id="date-display"></span>
+        <span class="edition">LATE CITY EDITION</span>
+        <span>VOL. MMXXVI... NO. 001</span>
+    </div>
+
+    <header class="masthead">
+        <div class="breaking-tag">BREAKING NEWS: NEW TALENT IN MARKET</div>
+        <h1>The Sai Sugun Times</h1>
+        <div class="tagline">DATA ANALYTICS • INFORMATION SYSTEMS • ITIL® 4 CERTIFIED</div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <canvas id="starfield" class="starfield"></canvas>
-        <div class="nebula"></div>
-        <div class="jupiter">
-            <div class="red-spot"></div>
-            <div class="data-orbit data1"></div>
-            <div class="data-orbit data2"></div>
+    <nav class="main-nav">
+        <a href="#summary">LATEST</a>
+        <a href="#experience">EXPERIENCE</a>
+        <a href="#projects">SPECIAL REPORTS</a>
+        <a href="#skills">TECH STACK</a>
+        <a href="#education">ACADEMIA</a>
+    </nav>
+
+    <main class="grid-container">
+        <aside class="col-left">
+            <span class="section-title">Technical Index</span>
+            <div class="brief-item">
+                <h4>Core Technical Skills</h4>
+                <ul class="skill-list">
+                    <li>Python, SQL, Java (Foundations)</li>
+                    <li>Data Analysis (Power BI, Pandas, Excel)</li>
+                    <li>APIs, Git, Docker (DevOps Exposure)</li>
+                    <li>SAP S/4HANA Cloud Fundamentals</li>
+                </ul>
+            </div>
+
+            <div class="brief-item">
+                <h4>Professional & Consulting</h4>
+                <ul class="skill-list">
+                    <li>Stakeholder Communication</li>
+                    <li>Translating Data into Insights</li>
+                    <li>Structured Thinking</li>
+                </ul>
+            </div>
+
+            <hr class="thin-rule">
+
+            <div class="brief-item">
+                <h4>Certifications</h4>
+                <ul class="skill-list">
+                    <li><strong>ITIL® 4 Foundation</strong></li>
+                    <li>Python for DS & ML</li>
+                    <li>Atomic & Nuclear Physics</li>
+                </ul>
+            </div>
+
+            <div class="weather-widget">
+                <strong>HIRING FORECAST</strong><br>
+                High motivation and eagerness to contribute to professional service teams.
+            </div>
+        </aside>
+
+        <div class="col-main">
+            <section id="summary">
+                <div class="live-label">LIVE: MARKET ANALYSIS</div>
+                <h2 class="main-headline">Dublin’s Newest Data Asset Hits Market: MSc Graduate Declared "Consulting-Ready"</h2>
+                <p class="byline">BY SAI SUGUN D R • DUBLIN, IRELAND</p>
+                
+                <div class="article-body">
+                    <p class="drop-cap">Armed with an MSc in Information Systems from University College Dublin, Sai Sugun D R has emerged as a high-value prospect for firms seeking to bridge the gap between complex data and executive strategy. Maintaining a 3.51 GPA, Sugun has demonstrated mastery in Machine Learning and Quantitative Data Analysis.</p>
+                    <p>His trajectory is marked by a unique blend of full-stack development and IT service management. "My goal is to learn from experienced teams while contributing a strong work ethic," Sugun stated. His hands-on experience spans from securing health records with blockchain to automating KPI reporting for global firms.</p>
+                </div>
+            </section>
+
+            <hr class="double-rule">
+
+            <section id="experience">
+                <span class="section-title">Professional Field Reports</span>
+                <article class="exp-card">
+                    <h3>PwC Switzerland | Virtual Intern</h3>
+                    <span class="exp-meta">FORAGE, 2025</span>
+                    <p>Optimized client-facing Power BI dashboards to track KPIs and business operations. Translated business requirements into actionable visual insights and simulated real-world stakeholder communication, reducing reporting turnaround by 30%.</p>
+                </article>
+
+                <article class="exp-card">
+                    <h3>British Airways | Virtual Intern</h3>
+                    <span class="exp-meta">FORAGE, 2025</span>
+                    <p>Delivered predictive modeling and customer insights via Python-based analytics. Scraped and analyzed review datasets to uncover buying patterns, improving insight accuracy by 15%.</p>
+                </article>
+
+                <article class="exp-card">
+                    <h3>Oasis Infobyte | Data Science Intern</h3>
+                    <span class="exp-meta">2024</span>
+                    <p>Performed exploratory data analysis to support business decision-making. Delivered insights through clear visualizations and reports designed for non-technical audiences.</p>
+                </article>
+            </section>
         </div>
-        <div class="saturn">
-            <div class="rings"></div>
-            <div class="data-orbit data3"></div>
-        </div>
-        <div class="comet"></div>
-        <div class="dashboard"></div>
-        <div class="container">
-            <h2 class="hero-title">Welcome to My Portfolio</h2>
-            <p>Engineer by Degree, Explorer by Choice — Coding My Way Through the Cosmos 💻🚀</p>
-            <a href="#projects" class="btn">Explore My Work</a>
-            <a href="SAI SUGUN D R ATSF CV.pdf" download class="btn" style="margin-left: 10px;">Download My Resume</a>
-        </div>
+
+        <aside class="col-right">
+            <span class="section-title">Special Reports</span>
+            <div class="project-item">
+                <h4 class="proj-title">Blockchain Health Records</h4>
+                <p>Developed a tamper-proof storage prototype using Python and SHA-2 hashing. Findings published in <strong>IJARSCT (2023)</strong>.</p>
+                <a href="https://github.com/Saisugun9090" class="github-link" target="_blank">View Repository &rarr;</a>
+            </div>
+
+            <div class="project-item">
+                <h4 class="proj-title">Insurance Management Portal</h4>
+                <p>Built a microservice-style portal using Flask and Angular. Containerized deployment with Docker, reducing setup time by 60%.</p>
+            </div>
+
+            <div class="project-item">
+                <h4 class="proj-title">Voice UI Usability Study</h4>
+                <p>Analyzed 100 participants via SUS and NASA-TLX scales to evaluate workload. Delivered improvements that raised usability scores by 20%.</p>
+            </div>
+
+            <hr class="thin-rule">
+
+            <div class="brief-item">
+                <span class="section-title">Education</span>
+                <p><strong>MSc Information Systems</strong><br>University College Dublin (GPA: 3.51)</p>
+                <p><strong>B.Eng. Computer Science</strong><br>VTU, India (CGPA: 7.7)</p>
+            </div>
+
+            <div class="brief-item">
+                <span class="section-title">Editorial: Hobbies</span>
+                <p class="hobbies-text">Wildlife photography, Astronomy, Astrophysics, Sports & Fitness.</p>
+            </div>
+        </aside>
+    </main>
+
+    <section class="quote-section">
+        <hr class="thin-rule">
+        <p class="editorial-quote">"Data is the oil of the 21st century, it is an untapped resource that, once refined, creates immense value."</p>
+        <hr class="thin-rule">
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p class="about-text">Hi there 👋 I'm Sai Sugun — a curious human running on Python, Power BI, and popcorn... Let’s connect — or build something interstellar.</p>
+    <footer class="footer">
+        <div class="classifieds">
+            <div class="contact-box">
+                <strong>CONTACT THE AUTHOR</strong><br>
+                Phone: +353-894910923<br>
+                Email: <a href="mailto:drsaisugun@gmail.com">drsaisugun@gmail.com</a><br>
+                Location: Dublin, Ireland
             </div>
-            <h3>Education</h3>
-            <div class="education-timeline">
-                <div class="education-card" style="animation-delay: 0.2s;">
-                    <h4>MSc Information Systems</h4>
-                    <p>University College Dublin (2025) – GPA 3.51/4.2</p>
-                    <span>Modules: Informatics, UI/UX, Data Science, Machine Learning</span>
-                </div>
-                <div class="education-card" style="animation-delay: 0.4s;">
-                    <h4>B.Eng. Computer Science</h4>
-                    <p>Visvesvaraya Technological University (2023) – CGPA 7.7/10</p>
-                    <span>Modules: Operating Systems, Databases, Computer Networks</span>
-                </div>
+            <div class="contact-box">
+                <strong>DIGITAL REACH</strong><br>
+                LinkedIn: <a href="https://www.linkedin.com/in/sai-sugun-d-r/" target="_blank">linkedin.com/in/sai-sugun-d-r/</a><br>
+                GitHub: <a href="https://github.com/Saisugun9090" target="_blank">github.com/Saisugun9090</a>
             </div>
         </div>
-    </section>
-
-    <!-- Projects Section (hover & tags added) -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <div class="project-card" data-tags="#Python #Blockchain">
-                    <h3>Blockchain Health Records</h3>
-                    <p>Led a team to develop a blockchain-based system using Python and SHA-2.</p>
-                   
-                    <a href="https://doi.org/10.48175/IJARSCT-10600" target="_blank" class="btn">View Publication</a>
-                </div>
-                <div class="project-card" data-tags="#PowerBI #DataViz">
-                    <h3>British Airways Data Analysis</h3>
-                    <p>Analyzed aviation data using PowerBI.</p>
-                    
-                    <a href="https://github.com/Saisugun9090/BA-Data-analysis" target="_blank" class="btn">View on GitHub</a>
-                </div>
-                <div class="project-card" data-tags="#PowerBI #Business">
-                    <h3>PwC Data Visualization</h3>
-                    <p>Created dashboards with PwC Switzerland using PowerBI.</p>
-                    <a href="https://github.com/Saisugun9090/PWC-PowerBI" target="_blank" class="btn">View on GitHub</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section with Star Ratings -->
-<section id="skills" class="section">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-container">
-                <div class="technical-skills">
-                    <h3>Technical Skills</h3>
-                    <div class="skill-bar">
-                         <span>Python</span>
-  <div class="bar"><div class="progress" style="width: 80%;"></div></div>
-</div>
-                    <div class="skill-bar">
-                        <span>JavaScript</span>
-                        <div class="bar"><div class="progress" style="width: 60%;"></div></div>
-                    </div>
-                    <div class="skill-bar">
-                        <span>SQL</span>
-                        <div class="bar"><div class="progress" style="width: 60%;"></div></div>
-                    </div>
-                    <div class="skill-bar">
-                        <span>PowerBI</span>
-                        <div class="bar"><div class="progress" style="width: 50%;"></div></div>
-                    </div>
-                    <div class="skill-bar">
-                        <span>UI/UX</span>
-                        <div class="bar"><div class="progress" style="width: 60%;"></div></div>
-                    </div>
-                </div>
-                <div class="soft-skills">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-item">Public Speaking</div>
-                    <div class="skill-item">Agile Team Working</div>
-                    <div class="skill-item">Group Discussion</div>
-                    <div class="skill-item">Seminars</div>
-                    <div class="skill-item">Team Lead</div>
-                    <div class="skill-item">Organizing</div>
-                </div>
-                <div class="language-skills">
-                    <h3>Languages</h3>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">English</div>
-                            <div class="flip-card-back">Advanced</div>
-                        </div>
-                    </div>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">Irish</div>
-                            <div class="flip-card-back">Beginner</div>
-                        </div>
-                    </div>
-                    <div class="flip-card">
-                        <div class="flip-card-inner">
-                            <div class="flip-card-front">French</div>
-                            <div class="flip-card-back">Beginner</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-  <section id="contact" class="section">
-  <div class="container">
-    <h2>Contact Me</h2>
-
-    <div class="contact-details">
-      <p><strong>Email:</strong>
-        <a href="mailto:sai.dolavavkotaoalliramu@ucdconnect.ie">
-          sai.dolavavkotaoalliramu@ucdconnect.ie
-        </a>
-      </p>
-      <p><strong>Phone:</strong> +353 894 910 923 | +91 6360470688</p>
-      <div class="social-links">
-        <a href="https://linkedin.com/in/sai-sugun-d-r" target="_blank" class="social-btn linkedin">LinkedIn</a>
-        <a href="https://github.com/Saisugun9090" target="_blank" class="social-btn github">GitHub</a>
-      </div>
-    </div>
-
-    <div class="contact-form">
-      <form id="contact-form">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your Email" required>
-        <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
-        <button type="submit" class="btn">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
-
-
-
-    <!-- Easter Egg -->
-    <div id="easter-egg" title="Click me!">👨‍🚀</div>
-<div id="thinking-cloud">Talk to me!</div>
-</div>
-  <div id="popup-modal">
-  <div class="popup-content">
-    <button id="close-popup">&times;</button>
-    <h3>You found the rocket, Lets launch somthing cooler, Hire me!</h3>
-  </div>
-</div>
-
-    <!-- Footer -->
-    <footer>
-        <p>Designed by Sai Sugun D R | © 2025</p>
+        <p class="copyright">© 2026 SAI SUGUN D R. ALL THE NEWS THAT'S FIT TO PRINT (AND CODE).</p>
     </footer>
+</div>
 
-    <script src="script.js"></script>
+<script>
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', options).toUpperCase();
+</script>
 </body>
 </html>
