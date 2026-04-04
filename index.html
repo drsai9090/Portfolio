@@ -1,170 +1,862 @@
 <!DOCTYPE html>
 <html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Sai Sugun Times | Professional Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Sugun D R — Mission Control</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --void:#020a12;
+  --deep:#041424;
+  --panel:#071e33;
+  --card:#0a2640;
+  --border:#0f4060;
+  --cyan:#00e5ff;
+  --cyan-dim:#0099bb;
+  --gold:#ffd700;
+  --gold-dim:#aa8800;
+  --green:#00ff88;
+  --green-dim:#00aa55;
+  --text:#c8dae8;
+  --text-dim:#5a7a90;
+  --orb:'Orbitron',sans-serif;
+  --raj:'Rajdhani',sans-serif;
+  --mono:'Share Tech Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--raj);
+  background:var(--void);
+  color:var(--text);
+  overflow-x:hidden;
+  font-size:16px;
+}
+
+/* ── STARFIELD ──────────────────────────────────────── */
+#starfield{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+  background:var(--void);
+}
+.star{position:absolute;border-radius:50%;background:white;animation:twinkle var(--d,3s) ease-in-out infinite var(--delay,0s)}
+@keyframes twinkle{0%,100%{opacity:var(--min,.1)}50%{opacity:var(--max,.9)}}
+
+/* ── SCAN LINE ──────────────────────────────────────── */
+body::after{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,229,255,0.015) 2px,rgba(0,229,255,0.015) 4px);
+  pointer-events:none;z-index:9999;
+}
+
+/* ── NAV ────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:56px;
+  background:rgba(2,10,18,0.92);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 3rem;
+  backdrop-filter:blur(12px);
+}
+.nav-id{
+  font-family:var(--orb);
+  font-size:0.8rem;color:var(--cyan);
+  letter-spacing:0.15em;
+}
+.nav-id span{color:var(--text-dim)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-family:var(--mono);
+  font-size:0.72rem;color:var(--text-dim);
+  text-decoration:none;letter-spacing:0.1em;
+  text-transform:uppercase;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+.nav-status{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--green);letter-spacing:0.08em;
+  display:flex;align-items:center;gap:6px;
+}
+.nav-status::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:var(--green);
+  animation:pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.2}}
+
+/* ── HERO ───────────────────────────────────────────── */
+.hero{
+  min-height:100vh;
+  display:grid;grid-template-columns:1fr 1fr;
+  padding-top:56px;
+  position:relative;z-index:1;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:4rem 2.5rem 4rem 4rem;
+  border-right:1px solid var(--border);
+  position:relative;
+}
+.hero-left::after{
+  content:'';
+  position:absolute;top:0;right:-1px;bottom:0;width:1px;
+  background:linear-gradient(180deg,transparent,var(--cyan) 40%,var(--cyan) 60%,transparent);
+  opacity:0.6;
+}
+.sys-tag{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--cyan-dim);letter-spacing:0.12em;
+  margin-bottom:0.75rem;
+}
+.sys-tag span{color:var(--cyan)}
+.hero-name{
+  font-family:var(--orb);
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:900;
+  color:#fff;
+  letter-spacing:0.05em;
+  line-height:1.1;
+  margin-bottom:0.3rem;
+  text-shadow:0 0 30px rgba(0,229,255,0.25);
+}
+.hero-sub{
+  font-family:var(--orb);font-size:0.85rem;
+  color:var(--cyan);letter-spacing:0.2em;
+  margin-bottom:1.75rem;
+  font-weight:400;
+}
+.hero-desc{
+  font-size:1.05rem;font-weight:300;
+  color:var(--text);line-height:1.75;
+  max-width:440px;margin-bottom:2.5rem;
+  border-left:2px solid var(--cyan-dim);
+  padding-left:1.25rem;
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--mono);font-size:0.78rem;
+  letter-spacing:0.1em;text-transform:uppercase;
+  padding:11px 22px;border-radius:2px;
+  text-decoration:none;transition:all 0.2s;
+  position:relative;overflow:hidden;
+}
+.btn-cta::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);
+  transition:left 0.4s;
+}
+.btn-cta:hover::before{left:100%}
+.btn-primary-cta{
+  background:var(--cyan);color:var(--void);
+  border:1px solid var(--cyan);
+}
+.btn-primary-cta:hover{background:#00ccdd;box-shadow:0 0 20px rgba(0,229,255,0.4)}
+.btn-ghost-cta{
+  background:transparent;color:var(--cyan);
+  border:1px solid var(--cyan-dim);
+}
+.btn-ghost-cta:hover{border-color:var(--cyan);box-shadow:0 0 16px rgba(0,229,255,0.2)}
+
+/* ── HERO RIGHT ─────────────────────────────────────── */
+.hero-right{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:4rem 3rem;gap:2rem;
+}
+.profile-frame{
+  position:relative;width:220px;height:220px;
+}
+.profile-ring{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid var(--cyan-dim);
+  animation:spin 20s linear infinite;
+}
+.profile-ring::before{
+  content:'';position:absolute;
+  top:-3px;left:50%;transform:translateX(-50%);
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);box-shadow:0 0 12px var(--cyan);
+}
+.profile-ring-2{
+  position:absolute;inset:-18px;border-radius:50%;
+  border:1px dashed rgba(0,229,255,0.2);
+  animation:spin 35s linear infinite reverse;
+}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.profile-img{
+  width:220px;height:220px;border-radius:50%;
+  object-fit:cover;object-position:top center;
+  border:2px solid var(--cyan-dim);
+  filter:contrast(1.05) saturate(0.9);
+  display:block;
+}
+.profile-glow{
+  position:absolute;inset:-4px;border-radius:50%;
+  box-shadow:0 0 40px rgba(0,229,255,0.15),inset 0 0 20px rgba(0,229,255,0.05);
+  pointer-events:none;
+}
+.stats-panel{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:1px;width:100%;max-width:360px;
+  border:1px solid var(--border);
+  background:var(--border);
+}
+.stat{
+  background:var(--panel);
+  padding:1rem 1.25rem;
+  position:relative;overflow:hidden;
+}
+.stat::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--cyan-dim),transparent);
+}
+.stat-val{
+  font-family:var(--orb);font-size:1.6rem;font-weight:700;
+  color:var(--cyan);line-height:1;margin-bottom:0.3rem;
+}
+.stat-val em{font-size:0.9rem;font-style:normal;color:var(--cyan-dim)}
+.stat-key{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em;text-transform:uppercase}
+.cert-bar{
+  width:100%;max-width:360px;
+  border:1px solid var(--border);
+  background:var(--panel);
+  padding:0.9rem 1.25rem;
+  display:flex;align-items:center;gap:1rem;
+}
+.cert-badge-small{
+  font-family:var(--orb);font-size:0.6rem;font-weight:700;
+  color:var(--void);background:var(--gold);
+  padding:4px 8px;border-radius:2px;white-space:nowrap;
+  letter-spacing:0.05em;
+}
+.cert-info{font-size:0.85rem;color:var(--text)}
+.cert-info strong{color:var(--gold);font-weight:600}
+.cert-year{font-family:var(--mono);font-size:0.68rem;color:var(--text-dim)}
+
+/* ── SECTIONS ───────────────────────────────────────── */
+section{padding:5rem 0;position:relative;z-index:1}
+.container{max-width:1100px;margin:0 auto;padding:0 3rem}
+.sec-header{margin-bottom:3rem}
+.sec-label{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--cyan-dim);letter-spacing:0.15em;text-transform:uppercase;
+  margin-bottom:0.5rem;
+}
+.sec-title{
+  font-family:var(--orb);font-size:clamp(1.4rem,2.5vw,2rem);
+  color:#fff;font-weight:700;letter-spacing:0.08em;
+  position:relative;display:inline-block;
+}
+.sec-title::after{
+  content:'';position:absolute;bottom:-8px;left:0;
+  width:100%;height:1px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
+.sec-divider{
+  border:none;border-top:1px solid var(--border);margin:0;
+}
+
+/* ── ABOUT ──────────────────────────────────────────── */
+#about{background:var(--void)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-block{
+  border:1px solid var(--border);background:var(--panel);
+  padding:1.75rem;position:relative;
+}
+.about-block::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),transparent);
+}
+.about-block p{color:var(--text);font-weight:300;line-height:1.8;margin-bottom:1rem;font-size:1rem}
+.about-block p:last-child{margin-bottom:0}
+.about-block strong{color:#fff;font-weight:600}
+.itil-block{
+  margin-top:1.25rem;
+  border-left:2px solid var(--gold);
+  padding:0.75rem 1rem;
+  background:rgba(255,215,0,0.04);
+  font-family:var(--mono);font-size:0.8rem;
+  color:var(--gold);line-height:1.6;
+}
+.skills-grid{display:flex;flex-direction:column;gap:1.25rem}
+.skill-group{
+  border:1px solid var(--border);background:var(--panel);
+  padding:1.25rem;position:relative;
+}
+.skill-group-label{
+  font-family:var(--mono);font-size:0.65rem;
+  color:var(--cyan-dim);letter-spacing:0.12em;text-transform:uppercase;
+  margin-bottom:0.75rem;
+}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{
+  font-family:var(--mono);font-size:0.72rem;
+  padding:4px 10px;
+  border:1px solid;border-radius:1px;
+  letter-spacing:0.04em;
+}
+.tag-cyan{border-color:var(--cyan-dim);color:var(--cyan);background:rgba(0,229,255,0.05)}
+.tag-default{border-color:var(--border);color:var(--text-dim);background:rgba(7,30,51,0.6)}
+.tag-gold{border-color:var(--gold-dim);color:var(--gold);background:rgba(255,215,0,0.04)}
+.tag-green{border-color:#00aa55;color:var(--green);background:rgba(0,255,136,0.05)}
+
+/* ── EXPERIENCE ─────────────────────────────────────── */
+#experience{background:var(--deep)}
+.exp-timeline{display:flex;flex-direction:column;gap:0}
+.exp-row{
+  display:grid;grid-template-columns:160px 1fr;
+  border:1px solid var(--border);border-bottom:none;
+  background:var(--panel);
+  transition:border-color 0.2s;
+}
+.exp-row:last-child{border-bottom:1px solid var(--border)}
+.exp-row:hover{border-color:var(--cyan-dim)}
+.exp-sidebar{
+  border-right:1px solid var(--border);
+  padding:1.75rem 1.25rem;
+  display:flex;flex-direction:column;gap:0.5rem;
+  background:var(--card);
+}
+.exp-yr{font-family:var(--mono);font-size:0.72rem;color:var(--cyan);letter-spacing:0.06em}
+.exp-org{font-family:var(--orb);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.08em;line-height:1.4}
+.exp-mode-badge{
+  font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;
+  border:1px solid var(--border);padding:2px 6px;
+  color:var(--text-dim);margin-top:auto;align-self:flex-start;
+}
+.exp-content{padding:1.75rem 2rem}
+.exp-title{
+  font-family:var(--orb);font-size:1rem;font-weight:700;
+  color:#fff;letter-spacing:0.05em;margin-bottom:0.75rem;
+}
+.exp-desc{color:var(--text);font-weight:300;line-height:1.75;font-size:0.95rem}
+.exp-metrics{display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1rem}
+.metric{
+  font-family:var(--mono);font-size:0.7rem;
+  color:var(--green);letter-spacing:0.06em;
+  display:flex;align-items:center;gap:5px;
+}
+.metric::before{content:'↑';color:var(--green)}
+
+/* ── PROJECTS ───────────────────────────────────────── */
+#projects{background:var(--void)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.proj-card{
+  background:var(--panel);padding:1.75rem;
+  display:flex;flex-direction:column;position:relative;overflow:hidden;
+  transition:background 0.2s;
+}
+.proj-card:hover{background:var(--card)}
+.proj-card.span2{grid-column:span 2;background:var(--card)}
+.proj-card.span2::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--green),transparent);
+}
+.proj-num{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.1em;margin-bottom:1rem}
+.pub-flag{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;
+  border:1px solid var(--gold-dim);color:var(--gold);
+  padding:3px 8px;margin-bottom:0.75rem;align-self:flex-start;
+}
+.proj-title-text{
+  font-family:var(--orb);font-size:1rem;font-weight:700;
+  color:#fff;letter-spacing:0.04em;margin-bottom:0.75rem;line-height:1.25;
+}
+.proj-desc-text{font-size:0.9rem;font-weight:300;color:var(--text);line-height:1.65;flex:1}
+.proj-footer{margin-top:1.25rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:0.75rem}
+.proj-stack{display:flex;flex-wrap:wrap;gap:5px}
+.proj-stack span{
+  font-family:var(--mono);font-size:0.65rem;letter-spacing:0.04em;
+  border:1px solid var(--border);color:var(--text-dim);
+  padding:2px 8px;
+}
+.proj-link-text{
+  font-family:var(--mono);font-size:0.7rem;letter-spacing:0.06em;
+  color:var(--cyan-dim);text-decoration:none;
+  transition:color 0.2s;white-space:nowrap;
+}
+.proj-link-text:hover{color:var(--cyan)}
+
+/* ── EDUCATION ──────────────────────────────────────── */
+#education{background:var(--deep)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2.5rem}
+.edu-card{
+  border:1px solid var(--border);background:var(--panel);
+  padding:1.75rem;position:relative;
+}
+.edu-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+}
+.edu-degree{font-family:var(--orb);font-size:1rem;font-weight:700;color:#fff;margin-bottom:0.3rem;letter-spacing:0.04em}
+.edu-uni{font-size:0.9rem;color:var(--cyan);font-weight:500;margin-bottom:0.5rem}
+.edu-gpa{font-family:var(--mono);font-size:0.75rem;color:var(--text-dim);margin-bottom:0.75rem}
+.edu-mods{font-size:0.85rem;color:var(--text);font-weight:300;line-height:1.6}
+.edu-mods strong{color:var(--text-dim);font-weight:500}
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.cert-item{
+  border:1px solid var(--border);background:var(--panel);
+  padding:1.25rem;
+  display:flex;align-items:center;gap:0.75rem;
+}
+.cert-icon-box{
+  width:36px;height:36px;border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--orb);font-size:0.6rem;font-weight:700;
+  flex-shrink:0;letter-spacing:0.04em;
+}
+.cert-item-name{font-size:0.85rem;color:var(--text);font-weight:500}
+.cert-item-sub{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim)}
+
+/* ── CONTACT ────────────────────────────────────────── */
+#contact{background:var(--void)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-intro p{color:var(--text);font-size:1rem;font-weight:300;line-height:1.8;margin-bottom:1.5rem}
+.creative-panel{
+  border:1px solid var(--gold-dim);background:rgba(255,215,0,0.03);
+  padding:1.5rem;
+}
+.creative-panel h3{
+  font-family:var(--orb);font-size:0.85rem;color:var(--gold);
+  letter-spacing:0.1em;margin-bottom:0.75rem;
+}
+.creative-item{
+  display:flex;align-items:center;gap:0.75rem;
+  font-size:0.875rem;color:var(--text);padding:0.4rem 0;
+  border-bottom:1px solid rgba(255,215,0,0.08);
+}
+.creative-item:last-child{border-bottom:none}
+.creative-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.contact-links{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.contact-link{
+  display:flex;align-items:center;gap:1.25rem;
+  padding:1.25rem 1.5rem;
+  background:var(--panel);
+  text-decoration:none;
+  transition:background 0.2s,border-color 0.2s;
+  position:relative;
+}
+.contact-link::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--cyan);transform:scaleY(0);transition:transform 0.2s;
+}
+.contact-link:hover{background:var(--card)}
+.contact-link:hover::before{transform:scaleY(1)}
+.cl-icon{
+  width:36px;height:36px;border-radius:2px;
+  border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:0.7rem;color:var(--cyan);
+  flex-shrink:0;
+}
+.cl-label{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.08em}
+.cl-val{font-size:0.9rem;color:var(--text);font-weight:500}
+.cl-arrow{margin-left:auto;font-family:var(--mono);font-size:0.8rem;color:var(--cyan-dim)}
+.contact-link.cta-link{background:rgba(0,229,255,0.08);border-left:2px solid var(--cyan)}
+.contact-link.cta-link .cl-val{color:var(--cyan)}
+
+/* ── FOOTER ─────────────────────────────────────────── */
+footer{
+  background:var(--deep);
+  border-top:1px solid var(--border);
+  padding:1.5rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  position:relative;z-index:1;
+}
+.footer-id{font-family:var(--orb);font-size:0.65rem;color:var(--text-dim);letter-spacing:0.12em}
+.footer-copy{font-family:var(--mono);font-size:0.65rem;color:var(--text-dim)}
+
+/* ── ANIMATE ────────────────────────────────────────── */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-up.in{opacity:1;transform:none}
+
+/* ── RESPONSIVE ─────────────────────────────────────── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{border-top:1px solid var(--border)}
+  .about-grid,.edu-grid,.contact-grid{grid-template-columns:1fr;gap:2rem}
+  .proj-grid{grid-template-columns:1fr}
+  .proj-card.span2{grid-column:span 1}
+  .cert-grid{grid-template-columns:1fr}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+}
+</style>
 </head>
 <body>
 
-<div class="broadsheet-wrapper">
-    <div class="top-bar">
-        <span id="date-display"></span>
-        <span class="edition">LATE CITY EDITION</span>
-        <span>VOL. MMXXVI... NO. 001</span>
+<canvas id="starfield"></canvas>
+
+<nav>
+  <div class="nav-id">SAI<span>.SUGUN</span> // ONLINE</div>
+  <ul class="nav-links">
+    <li><a href="#about">PROFILE</a></li>
+    <li><a href="#experience">MISSIONS</a></li>
+    <li><a href="#projects">LAB</a></li>
+    <li><a href="#education">ACADEMY</a></li>
+    <li><a href="#contact">COMMS</a></li>
+  </ul>
+  <div class="nav-status">SYSTEM ACTIVE</div>
+</nav>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="sys-tag">// SUBJECT_ID: <span>SS-DR-2025</span> // LOCATION: DUBLIN, IRELAND</div>
+    <h1 class="hero-name">SAI SUGUN<br>D R</h1>
+    <div class="hero-sub">DATA ANALYST · TECH CONSULTANT</div>
+    <p class="hero-desc">
+      MSc Information Systems · University College Dublin.<br>
+      Translating data into decisions — through dashboards, predictive models, and stories that move organisations forward.
+    </p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-cta btn-primary-cta">INITIATE CONTACT ›</a>
+      <a href="https://github.com/Saisugun9090" target="_blank" class="btn-cta btn-ghost-cta">VIEW GITHUB ↗</a>
     </div>
+  </div>
+  <div class="hero-right">
+    <div class="profile-frame">
+      <div class="profile-ring"></div>
+      <div class="profile-ring-2"></div>
+      <img class="profile-img" src="PROFILE .png">
+      <div class="profile-glow"></div>
+    </div>
+    <div class="stats-panel">
+      <div class="stat"><div class="stat-val">3.51<em>/4.2</em></div><div class="stat-key">MSc GPA · UCD</div></div>
+      <div class="stat"><div class="stat-val">5<em>+</em></div><div class="stat-key">Analytics Projects</div></div>
+      <div class="stat"><div class="stat-val">30<em>%</em></div><div class="stat-key">Faster Reporting</div></div>
+      <div class="stat"><div class="stat-val">1</div><div class="stat-key">Peer-Reviewed Pub.</div></div>
+    </div>
+    <div class="cert-bar">
+      <span class="cert-badge-small">ITIL® 4</span>
+      <div><div class="cert-info"><strong>Foundation Certified</strong></div><div class="cert-year">PEOPLECERT · 2025</div></div>
+    </div>
+  </div>
+</section>
 
-    <header class="masthead">
-        <div class="breaking-tag">BREAKING NEWS: NEW TALENT IN MARKET</div>
-        <h1>The Sai Sugun Times</h1>
-        <div class="tagline">DATA ANALYTICS • INFORMATION SYSTEMS • ITIL® 4 CERTIFIED</div>
-    </header>
-
-    <nav class="main-nav">
-        <a href="#summary">LATEST</a>
-        <a href="#experience">EXPERIENCE</a>
-        <a href="#projects">SPECIAL REPORTS</a>
-        <a href="#skills">TECH STACK</a>
-        <a href="#education">ACADEMIA</a>
-    </nav>
-
-    <main class="grid-container">
-        <aside class="col-left">
-            <span class="section-title">Technical Index</span>
-            <div class="brief-item">
-                <h4>Core Technical Skills</h4>
-                <ul class="skill-list">
-                    <li>Python, SQL, Java (Foundations)</li>
-                    <li>Data Analysis (Power BI, Pandas, Excel)</li>
-                    <li>APIs, Git, Docker (DevOps Exposure)</li>
-                    <li>SAP S/4HANA Cloud Fundamentals</li>
-                </ul>
-            </div>
-
-            <div class="brief-item">
-                <h4>Professional & Consulting</h4>
-                <ul class="skill-list">
-                    <li>Stakeholder Communication</li>
-                    <li>Translating Data into Insights</li>
-                    <li>Structured Thinking</li>
-                </ul>
-            </div>
-
-            <hr class="thin-rule">
-
-            <div class="brief-item">
-                <h4>Certifications</h4>
-                <ul class="skill-list">
-                    <li><strong>ITIL® 4 Foundation</strong></li>
-                    <li>Python for DS & ML</li>
-                    <li>Atomic & Nuclear Physics</li>
-                </ul>
-            </div>
-
-            <div class="weather-widget">
-                <strong>HIRING FORECAST</strong><br>
-                High motivation and eagerness to contribute to professional service teams.
-            </div>
-        </aside>
-
-        <div class="col-main">
-            <section id="summary">
-                <div class="live-label">LIVE: MARKET ANALYSIS</div>
-                <h2 class="main-headline">Dublin’s Newest Data Asset Hits Market: MSc Graduate Declared "Consulting-Ready"</h2>
-                <p class="byline">BY SAI SUGUN D R • DUBLIN, IRELAND</p>
-                
-                <div class="article-body">
-                    <p class="drop-cap">Armed with an MSc in Information Systems from University College Dublin, Sai Sugun D R has emerged as a high-value prospect for firms seeking to bridge the gap between complex data and executive strategy. Maintaining a 3.51 GPA, Sugun has demonstrated mastery in Machine Learning and Quantitative Data Analysis.</p>
-                    <p>His trajectory is marked by a unique blend of full-stack development and IT service management. "My goal is to learn from experienced teams while contributing a strong work ethic," Sugun stated. His hands-on experience spans from securing health records with blockchain to automating KPI reporting for global firms.</p>
-                </div>
-            </section>
-
-            <hr class="double-rule">
-
-            <section id="experience">
-                <span class="section-title">Professional Field Reports</span>
-                <article class="exp-card">
-                    <h3>PwC Switzerland | Virtual Intern</h3>
-                    <span class="exp-meta">FORAGE, 2025</span>
-                    <p>Optimized client-facing Power BI dashboards to track KPIs and business operations. Translated business requirements into actionable visual insights and simulated real-world stakeholder communication, reducing reporting turnaround by 30%.</p>
-                </article>
-
-                <article class="exp-card">
-                    <h3>British Airways | Virtual Intern</h3>
-                    <span class="exp-meta">FORAGE, 2025</span>
-                    <p>Delivered predictive modeling and customer insights via Python-based analytics. Scraped and analyzed review datasets to uncover buying patterns, improving insight accuracy by 15%.</p>
-                </article>
-
-                <article class="exp-card">
-                    <h3>Oasis Infobyte | Data Science Intern</h3>
-                    <span class="exp-meta">2024</span>
-                    <p>Performed exploratory data analysis to support business decision-making. Delivered insights through clear visualizations and reports designed for non-technical audiences.</p>
-                </article>
-            </section>
+<!-- ── ABOUT ──────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <div class="sec-label">// PROFILE SCAN</div>
+      <h2 class="sec-title">OPERATIVE PROFILE</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-block fade-up">
+        <p>I'm a recent MSc graduate from <strong>University College Dublin</strong> with a background spanning data analytics, full-stack development, and IT service management.</p>
+        <p>My strength is the intersection of <strong>technical depth and business clarity</strong>. I've built Power BI dashboards for simulated PwC engagements, built Python models for British Airways, and led a blockchain research project that was peer-reviewed and published.</p>
+        <p>I also bring a creative edge — designing marketing materials, promotional videos, and visual content in Canva — which sets me apart in client-facing consulting roles.</p>
+        <div class="itil-block">✦ ITIL® 4 Foundation certified — I understand how technology services are designed, delivered, and continuously improved at an organisational level.</div>
+      </div>
+      <div class="skills-grid fade-up" style="transition-delay:0.15s">
+        <div class="skill-group">
+          <div class="skill-group-label">// ANALYTICS STACK</div>
+          <div class="tags">
+            <span class="tag tag-cyan">Python</span><span class="tag tag-cyan">Power BI</span><span class="tag tag-cyan">SQL</span><span class="tag tag-cyan">Pandas</span><span class="tag tag-cyan">Scikit-learn</span><span class="tag tag-cyan">Excel</span>
+          </div>
         </div>
-
-        <aside class="col-right">
-            <span class="section-title">Special Reports</span>
-            <div class="project-item">
-                <h4 class="proj-title">Blockchain Health Records</h4>
-                <p>Developed a tamper-proof storage prototype using Python and SHA-2 hashing. Findings published in <strong>IJARSCT (2023)</strong>.</p>
-                <a href="https://github.com/Saisugun9090" class="github-link" target="_blank">View Repository &rarr;</a>
-            </div>
-
-            <div class="project-item">
-                <h4 class="proj-title">Insurance Management Portal</h4>
-                <p>Built a microservice-style portal using Flask and Angular. Containerized deployment with Docker, reducing setup time by 60%.</p>
-            </div>
-
-            <div class="project-item">
-                <h4 class="proj-title">Voice UI Usability Study</h4>
-                <p>Analyzed 100 participants via SUS and NASA-TLX scales to evaluate workload. Delivered improvements that raised usability scores by 20%.</p>
-            </div>
-
-            <hr class="thin-rule">
-
-            <div class="brief-item">
-                <span class="section-title">Education</span>
-                <p><strong>MSc Information Systems</strong><br>University College Dublin (GPA: 3.51)</p>
-                <p><strong>B.Eng. Computer Science</strong><br>VTU, India (CGPA: 7.7)</p>
-            </div>
-
-            <div class="brief-item">
-                <span class="section-title">Editorial: Hobbies</span>
-                <p class="hobbies-text">Wildlife photography, Astronomy, Astrophysics, Sports & Fitness.</p>
-            </div>
-        </aside>
-    </main>
-
-    <section class="quote-section">
-        <hr class="thin-rule">
-        <p class="editorial-quote">"Data is the oil of the 21st century, it is an untapped resource that, once refined, creates immense value."</p>
-        <hr class="thin-rule">
-    </section>
-
-    <footer class="footer">
-        <div class="classifieds">
-            <div class="contact-box">
-                <strong>CONTACT THE AUTHOR</strong><br>
-                Phone: +353-894910923<br>
-                Email: <a href="mailto:drsaisugun@gmail.com">drsaisugun@gmail.com</a><br>
-                Location: Dublin, Ireland
-            </div>
-            <div class="contact-box">
-                <strong>DIGITAL REACH</strong><br>
-                LinkedIn: <a href="https://www.linkedin.com/in/sai-sugun-d-r/" target="_blank">linkedin.com/in/sai-sugun-d-r/</a><br>
-                GitHub: <a href="https://github.com/Saisugun9090" target="_blank">github.com/Saisugun9090</a>
-            </div>
+        <div class="skill-group">
+          <div class="skill-group-label">// ENGINEERING</div>
+          <div class="tags">
+            <span class="tag tag-default">Flask</span><span class="tag tag-default">Angular</span><span class="tag tag-default">REST APIs</span><span class="tag tag-default">Docker</span><span class="tag tag-default">Git</span><span class="tag tag-default">JavaScript</span>
+          </div>
         </div>
-        <p class="copyright">© 2026 SAI SUGUN D R. ALL THE NEWS THAT'S FIT TO PRINT (AND CODE).</p>
-    </footer>
-</div>
+        <div class="skill-group">
+          <div class="skill-group-label">// CONSULTING</div>
+          <div class="tags">
+            <span class="tag tag-default">Stakeholder Comms</span><span class="tag tag-default">Data Storytelling</span><span class="tag tag-default">ITIL® 4</span><span class="tag tag-default">KPI Dashboards</span><span class="tag tag-default">Agile</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-label">// CREATIVE OPS</div>
+          <div class="tags">
+            <span class="tag tag-gold">Canva Design</span><span class="tag tag-gold">Promo Video</span><span class="tag tag-gold">Social Content</span><span class="tag tag-gold">Graphic Ads</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <div class="sec-label">// FIELD OPERATIONS LOG</div>
+      <h2 class="sec-title">MISSION RECORD</h2>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-row fade-up">
+        <div class="exp-sidebar">
+          <div class="exp-yr">2025</div>
+          <div class="exp-org">PWC SWITZERLAND</div>
+          <span class="exp-mode-badge">VIRTUAL · FORAGE</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">DATA VISUALISATION INTERN</div>
+          <p class="exp-desc">Designed and optimised client-facing Power BI dashboards to track KPIs and operational performance metrics. Translated ambiguous business requirements into clear, actionable visual insights. Delivered concise recommendations in simulated consulting engagements — replicating real-world client communication under pressure.</p>
+          <div class="exp-metrics">
+            <span class="metric">30% faster reporting turnaround</span>
+            <span class="metric">Client-ready KPI dashboards</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-row fade-up" style="transition-delay:0.1s">
+        <div class="exp-sidebar">
+          <div class="exp-yr">2025</div>
+          <div class="exp-org">BRITISH AIRWAYS</div>
+          <span class="exp-mode-badge">VIRTUAL · FORAGE</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">DATA SCIENCE INTERN</div>
+          <p class="exp-desc">Scraped and analysed customer review datasets to uncover buying behaviour patterns. Built predictive models in Python and visualised findings in Power BI for stakeholder presentations. Developed data pipelines to support business-critical operational decisions.</p>
+          <div class="exp-metrics">
+            <span class="metric">15% improvement in insight accuracy</span>
+            <span class="metric">Predictive modelling in Python</span>
+          </div>
+        </div>
+      </div>
+      <div class="exp-row fade-up" style="transition-delay:0.2s">
+        <div class="exp-sidebar">
+          <div class="exp-yr">2024</div>
+          <div class="exp-org">OASIS INFOBYTE</div>
+          <span class="exp-mode-badge">INTERNSHIP</span>
+        </div>
+        <div class="exp-content">
+          <div class="exp-title">DATA SCIENCE INTERN</div>
+          <p class="exp-desc">Performed exploratory data analysis (EDA) to surface trends and patterns supporting business decision-making. Delivered insights through clear visualisations and written reports designed to be understood by non-technical audiences including senior management.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ──────────────────────────────────────── -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <div class="sec-label">// RESEARCH LABORATORY</div>
+      <h2 class="sec-title">DEPLOYED SYSTEMS</h2>
+    </div>
+    <div class="proj-grid fade-up">
+      <div class="proj-card span2">
+        <div class="proj-num">PROJECT_01 // FEATURED</div>
+        <div class="pub-flag">✦ PEER-REVIEWED · IJARSCT 2023</div>
+        <h3 class="proj-title-text">Blockchain Health Records System</h3>
+        <p class="proj-desc-text">Led a KSCST-sponsored team to build a tamper-proof health record storage system using Python and SHA-2 blockchain hashing. Achieved 100% data integrity across all test cases. Findings were formally published in a peer-reviewed journal — a rare achievement at undergraduate level.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Python</span><span>SHA-2</span><span>Blockchain</span><span>Java</span></div>
+          <a href="https://doi.org/10.48175/IJARSCT-10600" target="_blank" class="proj-link-text">VIEW PUBLICATION ↗</a>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">PROJECT_02</div>
+        <h3 class="proj-title-text">PwC KPI Dashboard Suite</h3>
+        <p class="proj-desc-text">Client-ready Power BI dashboards monitoring business KPIs and operations. Reduced reporting turnaround by 30% through automated visualisations.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Power BI</span><span>DAX</span></div>
+          <a href="https://github.com/Saisugun9090/PWC-PowerBI" target="_blank" class="proj-link-text">GITHUB ↗</a>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">PROJECT_03</div>
+        <h3 class="proj-title-text">British Airways Customer Analytics</h3>
+        <p class="proj-desc-text">Web-scraped and analysed customer reviews using Pandas. Built predictive models improving insight accuracy by 15%, visualised in Power BI for executives.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Python</span><span>Pandas</span><span>Power BI</span></div>
+          <a href="https://github.com/Saisugun9090/BA-Data-analysis" target="_blank" class="proj-link-text">GITHUB ↗</a>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">PROJECT_04</div>
+        <h3 class="proj-title-text">Insurance Management Portal</h3>
+        <p class="proj-desc-text">Microservice-style web app for policy tracking and claims management. Docker containerisation cut environment setup time by 60%. Tested with 200 users.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Flask</span><span>Angular</span><span>Docker</span></div>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">PROJECT_05</div>
+        <h3 class="proj-title-text">Voice UI Usability Study</h3>
+        <p class="proj-desc-text">100-participant study measuring cognitive workload vs. usability in voice interfaces (SUS & NASA-TLX). UX improvements raised usability scores by 20%.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Alexa</span><span>SUS</span><span>NASA-TLX</span></div>
+          <a href="https://github.com/Saisugun9090/Load-and-Code-Balancing-Usability-and-Workload-in-Voice-Mode" target="_blank" class="proj-link-text">GITHUB ↗</a>
+        </div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-num">PROJECT_06</div>
+        <h3 class="proj-title-text">Emotion Detection in Text</h3>
+        <p class="proj-desc-text">NLP-based classifier trained on Twitter data to detect emotions in social media content using multi-class text classification pipelines.</p>
+        <div class="proj-footer">
+          <div class="proj-stack"><span>Python</span><span>NLP</span><span>Scikit-learn</span></div>
+          <a href="https://github.com/Saisugun9090/Emotion-Detection-in-Text-An-Experiment-with-Twitter-Data" target="_blank" class="proj-link-text">GITHUB ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ─────────────────────────────────────── -->
+<section id="education">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <div class="sec-label">// ACADEMIC RECORDS</div>
+      <h2 class="sec-title">TRAINING ACADEMY</h2>
+    </div>
+    <div class="edu-grid fade-up">
+      <div class="edu-card">
+        <div class="edu-degree">MSc Information Systems</div>
+        <div class="edu-uni">University College Dublin, Ireland</div>
+        <div class="edu-gpa">GPA: 3.51 / 4.2 · 2024–2025</div>
+        <div class="edu-mods"><strong>Modules:</strong> Machine Learning · UI/UX Design · Quantitative Data Analysis · Data &amp; Society · Informatics</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-degree">B.Eng. Computer Science</div>
+        <div class="edu-uni">Visvesvaraya Technological University, India</div>
+        <div class="edu-gpa">CGPA: 7.7 / 10 · 2019–2023</div>
+        <div class="edu-mods"><strong>Modules:</strong> Operating Systems · Databases · Computer Networks · Data Structures &amp; Algorithms</div>
+      </div>
+    </div>
+    <div class="cert-grid fade-up" style="transition-delay:0.15s">
+      <div class="cert-item">
+        <div class="cert-icon-box" style="background:var(--gold);color:var(--void)">ITIL</div>
+        <div><div class="cert-item-name">ITIL® 4 Foundation</div><div class="cert-item-sub">PEOPLECERT · 2025</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon-box" style="background:#1B3A6B;color:var(--cyan)">SAP</div>
+        <div><div class="cert-item-name">SAP S/4HANA Cloud</div><div class="cert-item-sub">SALES FUNDAMENTALS</div></div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-icon-box" style="background:#1a4a2a;color:var(--green)">PY</div>
+        <div><div class="cert-item-name">Python for DS &amp; ML</div><div class="cert-item-sub">BOOTCAMP CERTIFICATE</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ───────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <div class="sec-label">// ESTABLISH COMMS</div>
+      <h2 class="sec-title">OPEN CHANNEL</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-intro fade-up">
+        <p>Actively seeking graduate roles in <strong style="color:#fff">data analytics</strong>, <strong style="color:#fff">technology consulting</strong>, business intelligence, or digital content in Ireland. Open to conversations — I respond fast.</p>
+        <div class="creative-panel">
+          <h3>// CREATIVE SUBSYSTEM</h3>
+          <div class="creative-item"><div class="creative-dot"></div>Canva graphic design — flyers, ads, social posts</div>
+          <div class="creative-item"><div class="creative-dot"></div>Promotional video editing &amp; production</div>
+          <div class="creative-item"><div class="creative-dot"></div>Wildlife photography · Astronomy enthusiast</div>
+          <div class="creative-item"><div class="creative-dot"></div>UCD Club event organiser</div>
+          <div class="creative-item"><div class="creative-dot"></div>Finance, sci-fi, space exploration</div>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.15s">
+        <div class="contact-links">
+          <a href="mailto:drsaisugun@gmail.com" class="contact-link">
+            <div class="cl-icon">@</div>
+            <div><div class="cl-label">EMAIL</div><div class="cl-val">drsaisugun@gmail.com</div></div>
+            <span class="cl-arrow">›</span>
+          </a>
+          <a href="tel:+353894910923" class="contact-link">
+            <div class="cl-icon">☎</div>
+            <div><div class="cl-label">PHONE</div><div class="cl-val">+353 894 910 923</div></div>
+            <span class="cl-arrow">›</span>
+          </a>
+          <a href="https://www.linkedin.com/in/sai-sugun-d-r/" target="_blank" class="contact-link">
+            <div class="cl-icon">LI</div>
+            <div><div class="cl-label">LINKEDIN</div><div class="cl-val">linkedin.com/in/sai-sugun-d-r</div></div>
+            <span class="cl-arrow">›</span>
+          </a>
+          <a href="https://github.com/Saisugun9090" target="_blank" class="contact-link">
+            <div class="cl-icon">GH</div>
+            <div><div class="cl-label">GITHUB</div><div class="cl-val">github.com/Saisugun9090</div></div>
+            <span class="cl-arrow">›</span>
+          </a>
+          <a href="Sai_Sugun_CV.pdf" target="_blank" class="contact-link cta-link">
+            <div class="cl-icon" style="border-color:var(--cyan);color:var(--cyan)">↓</div>
+            <div><div class="cl-label">DOWNLOAD</div><div class="cl-val">CV / RESUME</div></div>
+            <span class="cl-arrow" style="color:var(--cyan)">›</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-id">SAI SUGUN D R // DUBLIN, IRELAND</div>
+  <div class="footer-copy">© <span id="yr"></span> ALL SYSTEMS OPERATIONAL</div>
+</footer>
 
 <script>
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    document.getElementById('date-display').textContent = new Date().toLocaleDateString('en-US', options).toUpperCase();
+// ── STARFIELD ──────────────────────────────────────────
+const canvas = document.getElementById('starfield');
+const ctx = canvas.getContext('2d');
+let stars = [];
+let W, H;
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+function makeStars(n) {
+  stars = [];
+  for (let i = 0; i < n; i++) {
+    stars.push({
+      x: Math.random() * W, y: Math.random() * H,
+      r: Math.random() * 1.2 + 0.1,
+      a: Math.random(),
+      speed: Math.random() * 0.004 + 0.001,
+      phase: Math.random() * Math.PI * 2
+    });
+  }
+}
+makeStars(280);
+
+let t = 0;
+function drawStars() {
+  ctx.clearRect(0, 0, W, H);
+  t += 0.016;
+  stars.forEach(s => {
+    const alpha = 0.15 + 0.7 * ((Math.sin(t * s.speed * 60 + s.phase) + 1) / 2);
+    ctx.beginPath();
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(200,230,255,${alpha})`;
+    ctx.fill();
+  });
+  requestAnimationFrame(drawStars);
+}
+drawStars();
+
+// ── SCROLL REVEAL ─────────────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// ── YEAR ──────────────────────────────────────────────
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── LIVE CLOCK in nav ─────────────────────────────────
+function tick() {
+  const d = new Date();
+  const ts = d.toISOString().slice(11,19);
+  const el = document.querySelector('.nav-status');
+  if (el) el.innerHTML = `SYSTEM ACTIVE &nbsp;${ts}Z`;
+}
+tick(); setInterval(tick, 1000);
 </script>
 </body>
 </html>
