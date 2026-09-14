@@ -5,7 +5,7 @@ const main=document.querySelector('#main'), status=document.querySelector('#scen
 const media=matchMedia('(prefers-reduced-motion: reduce)');
 let preference=true;
 try { preference=localStorage.getItem('production-motion')!=='off'; } catch {}
-let motion=preference&&!media.matches, scene=null, routeSerial=0, currentRoute={page:'home'}, disposeView=()=>{}, filter='all';
+let motion=preference&&!media.matches, scene=null, routeSerial=0, currentRoute={page:'home'}, filter='all';
 let tourActive=false, tourPlaying=false, tourIndex=0, tourTimer=null;
 let flowPhase='source';
 const flowLabels={source:'Source code',contributions:'Frontend · Backend · Data',merge:'Merge changes',build:'Build',test:'Run tests',deploy:'Deployment setup'};
@@ -59,9 +59,6 @@ function showFlow(phase) {
   document.querySelectorAll('.home-view [data-stage]').forEach(link=>link.classList.toggle('is-flow-active',phase==='contributions'?['frontend','backend','data'].includes(link.dataset.stage):link.dataset.stage===phase));
 }
 
-function labView() {
-  return `<section class="lab-view page-view"><div class="page-heading"><div><h1>Demos</h1></div><p>Try the CSV validator with sample data.</p></div><div class="demo-lead"><span aria-hidden="true">{ csv }</span><p>Edit records, check duplicates and download the results as JSON.</p></div><div id="csv-lab"></div></section>`;
-}
 function aboutView() {
   return `<section class="about-view page-view"><div class="page-heading"><div><h1>About</h1></div><p>${esc(profile.intro)}</p></div>
     <div class="about-grid"><div class="about-story">${profile.story.map(p=>`<p>${esc(p)}</p>`).join('')}</div></div>
@@ -113,7 +110,6 @@ function renderView(route) {
   if(route.page==='stage')return stageView(getStage(route.id));
   if(route.page==='projects')return projectsView();
   if(route.page==='project')return projectView(getProject(route.id));
-  if(route.page==='lab')return labView();
   if(route.page==='about')return aboutView();
   if(route.page==='contact')return contactView();
   return '<section class="page-view empty-view"><p class="eyebrow">404</p><h1>Page not found</h1><a class="button primary" href="#/">Back to overview →</a></section>';
@@ -164,9 +160,9 @@ import('./production-scene.js').then(async({mountProduction})=>{
 async function render(initial=false) {
   const serial=++routeSerial, route=resolveRoute(location.hash,projects.map(p=>p.id),stages.map(s=>s.id));
   const destination=destinationFor(route);
-  const title=route.page==='home'?'Full-stack Software Engineer':route.page==='stage'?getStage(route.id).title:route.page==='project'?getProject(route.id).title:({projects:'Projects',lab:'Demos',about:'About',contact:'Contact'}[route.page]||'Page not found');
+  const title=route.page==='home'?'Full-stack Software Engineer':route.page==='stage'?getStage(route.id).title:route.page==='project'?getProject(route.id).title:({projects:'Projects',about:'About',contact:'Contact'}[route.page]||'Page not found');
   if(tourActive&&(route.page!=='stage'||route.id!==tourStages[tourIndex]))stopTour();
-  clearTourTimer();disposeView();disposeView=()=>{};
+  clearTourTimer();
   main.classList.remove('view-is-ready');main.classList.add('is-travelling');main.setAttribute('aria-busy','true');
   main.inert=!initial;
   document.body.classList.add('is-travelling');document.body.dataset.view=route.page;
@@ -187,7 +183,6 @@ async function render(initial=false) {
   document.querySelector('#route-status').textContent=tourActive?`${tourIndex+1} of ${tourStages.length}: ${title}`:title;
   if(!initial&&!tourPlaying&&!(tourActive&&tourPanel.contains(document.activeElement)))main.focus({preventScroll:true});
   updateTour();scheduleTour();
-  if(route.page==='lab')import('./lab.js').then(({mountLab})=>{if(serial===routeSerial)disposeView=mountLab(document.querySelector('#csv-lab'))||(()=>{});}).catch(()=>{if(serial===routeSerial)document.querySelector('#csv-lab').innerHTML='<p role="alert">The demo could not load. Refresh to try again.</p>';});
 }
 document.addEventListener('click',event=>{
   const target=event.target;
@@ -217,6 +212,6 @@ document.addEventListener('pointerleave',()=>scene?.setPointer(0,0));
 document.addEventListener('visibilitychange',()=>{if(document.hidden)clearTourTimer();else if(main.classList.contains('view-is-ready'))scheduleTour();});
 document.querySelector('#motion-toggle').addEventListener('click',()=>{preference=!preference;try{localStorage.setItem('production-motion',preference?'on':'off');}catch{}syncMotion();});
 media.addEventListener('change',syncMotion);window.addEventListener('hashchange',()=>render());
-window.addEventListener('pagehide',()=>{clearTourTimer();disposeView();scene?.destroy();});
+window.addEventListener('pagehide',()=>{clearTourTimer();scene?.destroy();});
 window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 syncMotion();render(true);
