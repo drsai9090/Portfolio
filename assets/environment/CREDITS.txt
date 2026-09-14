@@ -1,0 +1,16 @@
+Studio Small 09, 1K Radiance HDR
+Artist: Sergej Majboroda
+Source: Poly Haven — https://polyhaven.com/a/studio_small_09
+Asset URL: https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_09_1k.hdr
+License: CC0 1.0 Universal — https://creativecommons.org/publicdomain/zero/1.0/
+Poly Haven asset license: https://polyhaven.com/license
+Downloaded: 2026-09-12
+Original MD5: d5d7eb9d26d341d6aa4d11c1a54fd97c
+
+The original HDR file is bundled locally, unmodified. It supplies reflection
+lighting only; it is not used as the scene background.
+
+The accompanying HDRLoader.js is from the official Three.js r186 release:
+https://github.com/mrdoob/three.js/blob/r186/examples/jsm/loaders/HDRLoader.js
+Its sole change is replacing the bare 'three' import with './three.module.js'
+for build-free GitHub Pages hosting. Covered by ../vendor/THREE-LICENSE.txt (MIT).
