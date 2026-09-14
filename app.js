@@ -1,5 +1,5 @@
 import { profile, projects, stages, tourStages } from './journey-content.js';
-import { resolveRoute } from './routes.js';
+import { resolveRoute } from './routes.js?v=2b31b47';
 
 const main=document.querySelector('#main'), status=document.querySelector('#scene-status'), tourPanel=document.querySelector('#tour-panel');
 const media=matchMedia('(prefers-reduced-motion: reduce)');
