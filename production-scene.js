@@ -1,7 +1,7 @@
 import * as THREE from './assets/vendor/three.module.js';
 
 const STAGES=['frontend','backend','data','build','test','deploy'];
-const PROJECTS=['your-senior','ubuntu-tool','mindful-u','emotion-classifier'];
+const PROJECTS=['sugun-games','inception-workbench','your-senior','ubuntu-tool','mindful-u','emotion-classifier'];
 const IDS=[...STAGES,...PROJECTS.map(id=>'project:'+id)];
 const BLUE='#0866ed', TEAL='#00aaa2', EMERALD='#13b881';
 
@@ -150,6 +150,7 @@ export async function mountProduction(container,{reducedMotion=false,onSelect=()
       if(type==='chat'){ctx.beginPath();ctx.roundRect(32,47,193,143,25);ctx.stroke();ctx.beginPath();ctx.moveTo(69,189);ctx.lineTo(59,225);ctx.lineTo(112,190);ctx.stroke();for(let i=0;i<3;i++){ctx.beginPath();ctx.arc(79+i*50,120,9,0,Math.PI*2);ctx.fill();}}
       if(type==='heart'){ctx.beginPath();ctx.moveTo(128,216);ctx.bezierCurveTo(-33,103,61,-6,128,76);ctx.bezierCurveTo(199,-7,289,103,128,216);ctx.stroke();}
       if(type==='emotion'){ctx.beginPath();ctx.arc(128,128,91,0,Math.PI*2);ctx.stroke();for(const x of[92,165]){ctx.beginPath();ctx.arc(x,106,8,0,Math.PI*2);ctx.fill();}ctx.beginPath();ctx.arc(128,139,44,.18,Math.PI-.18);ctx.stroke();}
+      if(type==='game'){ctx.beginPath();ctx.roundRect(24,65,208,132,35);ctx.stroke();ctx.beginPath();ctx.moveTo(56,130);ctx.lineTo(105,130);ctx.moveTo(80,105);ctx.lineTo(80,155);ctx.stroke();for(const [x,y]of[[164,143],[194,113]]){ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fill();}}
     },256,256);
     const mat=new THREE.MeshBasicMaterial({map,transparent:true,depthWrite:false,toneMapped:false,fog:false});materials.add(mat);const p=mesh(parent,new THREE.PlaneGeometry(size,size),mat,x,y,z);p.castShadow=false;return p;
   }
@@ -229,17 +230,19 @@ export async function mountProduction(container,{reducedMotion=false,onSelect=()
   const testLights=[];for(let i=0;i<3;i++){const led=mesh(test.group,new THREE.SphereGeometry(.045,10,8),lightStrip,-.14+i*.14,-.31,1.08);led.castShadow=false;testLights.push(led);}
   for(const x of[3.38,4.97])heading(world,'→',x,-.12,1.05,.42,'#155275');
 
-  const showcase=addNode('showcase',[4.15,2.8,-.15],'Projects',BLUE);
-  const showcaseBack=rounded(showcase.group,5.5,2.86,.14,0,0,-.2,glass,.24);showcaseBack.castShadow=false;rim(showcase.group,5.53,2.9,0,0,.0,'#a4dcff');heading(showcase.group,'Projects',-1.19,1.02,.13,2.35,'#0b2f5a');
+  const showcase=addNode('showcase',[4.15,3.35,-.15],'Projects',BLUE);
+  const showcaseBack=rounded(showcase.group,5.5,4,.14,0,0,-.2,glass,.24);showcaseBack.castShadow=false;rim(showcase.group,5.53,4.04,0,0,.0,'#a4dcff');heading(showcase.group,'Projects',-1.19,1.5,.13,2.35,'#0b2f5a');
   const projectDefinitions=[
-    {slug:'your-senior',title:'Your Senior',icon:'chat',color:BLUE,portal:[2.9,2.98,.08],position:[25,-2.75,-9]},
-    {slug:'ubuntu-tool',title:'Ubuntu Tool',icon:'terminal',color:TEAL,portal:[5.4,2.98,.08],position:[43,-2.75,-9]},
-    {slug:'mindful-u',title:'Mindful U',icon:'heart',color:EMERALD,portal:[2.9,1.93,.08],position:[61,-2.75,-9]},
-    {slug:'emotion-classifier',title:'Emotion classifier',icon:'emotion',color:BLUE,portal:[5.4,1.93,.08],position:[79,-2.75,-9]}
+    {slug:'sugun-games',title:'Sugun Games',icon:'game',color:BLUE,portal:[2.9,3.83,.08],position:[25,-2.75,-27]},
+    {slug:'inception-workbench',title:'Reconciliation Workbench',icon:'check',color:TEAL,portal:[5.4,3.83,.08],position:[43,-2.75,-27]},
+    {slug:'your-senior',title:'Your Senior',icon:'chat',color:BLUE,portal:[2.9,2.78,.08],position:[25,-2.75,-9]},
+    {slug:'ubuntu-tool',title:'Ubuntu Tool',icon:'terminal',color:TEAL,portal:[5.4,2.78,.08],position:[43,-2.75,-9]},
+    {slug:'mindful-u',title:'Mindful U',icon:'heart',color:EMERALD,portal:[2.9,1.73,.08],position:[61,-2.75,-9]},
+    {slug:'emotion-classifier',title:'Emotion classifier',icon:'emotion',color:BLUE,portal:[5.4,1.73,.08],position:[79,-2.75,-9]}
   ];
   for(const p of projectDefinitions){
     const portal=addNode('portal:'+p.slug,p.portal,p.title,p.color);
-    const map=texture((ctx,text,card)=>{card(0,0,660,220,p.slug==='ubuntu-tool'?'#103550':'#e2f1ff',0);text(p.title,32,80,47,p.slug==='ubuntu-tool'?'#ffffff':'#0a3558','700');text('Open project  →',32,160,32,p.slug==='ubuntu-tool'?'#79e6dc':'#0876ca','700');},660,220);
+    const map=texture((ctx,text,card)=>{card(0,0,660,220,p.slug==='ubuntu-tool'?'#103550':'#e2f1ff',0);text(p.title,32,80,p.title.length>20?32:47,p.slug==='ubuntu-tool'?'#ffffff':'#0a3558','700');text('Open project  →',32,160,32,p.slug==='ubuntu-tool'?'#79e6dc':'#0876ca','700');},660,220);
     screen(portal.group,2.24,.77,0,0,.16,map,p.color);
     portal.group.traverse(o=>{if(o.isMesh){o.userData.destination='project:'+p.slug;pickable.push(o);}});
     // The connected project rail passes beneath the studio floor, then enters
@@ -259,14 +262,48 @@ export async function mountProduction(container,{reducedMotion=false,onSelect=()
   projectBadge.group.traverse(o=>{if(o.isMesh){o.userData.destination='projects';pickable.push(o);}});
   pipeline('deploy','project-badge',[deploy.position.toArray(),[6.67,-.32,.03],[6.2,-1.6,.06],projectBadge.position.toArray()],BLUE,.37);
   for(const x of[-6.7,-1.75,5.9]){cylinder(world,.71,.18,x,-3.91,.02,silver,36);cylinder(world,.31,.93,x,-3.37,.02,whiteMetal,28);}
+
+  const arcade=nodes.get('project:sugun-games').group;
+  const arcadeMap=texture((ctx,text,card)=>{
+    text('SUGUN GAMES',32,60,39,BLUE,'700');text('CHOOSE A GAME',32,109,23,'#42748e','700');
+    for(const [i,name]of['Brick Garage','Formula Club','Echo Shift','Pocket Snake'].entries()){
+      const x=32+i%2*367,y=143+Math.floor(i/2)*218;card(x,y,343,195,i%2?'#d6ede7':'#dceafb');text(name,x+18,y+167,27,'#193d56','700');
+      if(i===0){card(x+100,y+52,144,55,'#176be2');card(x+134,y+29,76,43,'#66aff8');for(const wheelX of[x+122,x+223]){ctx.fillStyle='#163751';ctx.beginPath();ctx.arc(wheelX,y+108,18,0,Math.PI*2);ctx.fill();}}
+      if(i===1){ctx.strokeStyle='#5b8290';ctx.lineWidth=24;ctx.beginPath();ctx.ellipse(x+170,y+76,100,43,0,0,Math.PI*2);ctx.stroke();card(x+153,y+21,34,19,'#0866ed',3);card(x+193,y+110,34,19,'#008e72',3);}
+      if(i===2){for(let n=0;n<4;n++)card(x+63+n*54,y+74-n%2*23,37,37,n===3?'#13b881':'#8dbbe9',4);card(x+70,y+30,24,27,BLUE,3);}
+      if(i===3){for(const [a,b]of[[0,0],[1,0],[2,0],[2,1],[2,2]])card(x+104+a*30,y+28+b*30,25,25,'#008e72',4);card(x+204,y+34,17,17,'#e58459',4);}
+    }
+  },800,610);
+  screen(arcade,4.45,3.39,-1.06,2.02,-.1,arcadeMap,BLUE);
+  slab(arcade,4.6,.85,-1.04,.23,1.33);cylinder(arcade,.15,.38,-2.05,.6,1.43,darkMetal,20);mesh(arcade,new THREE.SphereGeometry(.2,20,12),cobalt,-2.05,.91,1.43);
+  for(const [i,mat]of[cobalt,teal,green].entries())cylinder(arcade,.16,.08,-.66+i*.47,.49,1.46,mat,20);
+  const car=new THREE.Group();car.position.set(2.25,.58,.55);car.rotation.y=-.32;arcade.add(car);
+  box(car,1.5,.34,.84,0,.16,0,cobalt);box(car,.68,.35,.78,-.09,.5,0,whiteMetal);box(car,.49,.22,.8,.03,.55,0,glass);
+  for(const x of[-.48,.48])for(const z of[-.48,.48]){const wheel=cylinder(car,.28,.16,x,0,z,darkMetal,24);wheel.rotation.x=Math.PI/2;}
+  for(const x of[-.57,.55])for(const z of[-.2,.2])cylinder(car,.09,.07,x,.37,z,cobalt,16);
+  label(arcade,'BUILD · RACE · PLAY',2.15,1.89,.3,2.33,TEAL);
+
+  const workbench=nodes.get('project:inception-workbench').group;
+  const workbenchMap=texture((ctx,text,card)=>{
+    text('RECONCILIATION WORKBENCH',28,58,36,TEAL,'700');text('SYNTHETIC DATA · LOCAL PROTOTYPE',28,101,23,'#507e8c','700');
+    card(27,136,945,58,'#d7edf0');text('Source row',45,174,26,'#244b61','700');text('Match result',413,174,26,'#244b61','700');text('Review',800,174,26,'#244b61','700');
+    for(const [i,state]of['Matched','Needs review','Unmatched'].entries()){
+      const y=214+i*88;card(27,y,945,72,i===1?'#fff0d9':'#e8f3f8');text('CSV row 0'+(i+1),45,y+46,28,'#244b61');text(state,413,y+46,28,i===1?'#936221':'#176e65','700');text(i===0?'✓':'Open →',802,y+46,26,'#266677','700');
+    }
+    card(27,501,945,92,'#deedf7');text('Review the source before accepting a match.',47,541,28,'#234d65','700');text('CSV import  →  match  →  human review  →  audit',47,575,23,'#587a91');
+  },1000,630);
+  screen(workbench,5.35,3.37,-.39,2.06,-.1,workbenchMap,TEAL);box(workbench,1.4,.12,.72,-.39,.2,0,silver);box(workbench,.16,.4,.16,-.39,.47,-.18,silver);
+  for(let i=0;i<3;i++){const sheet=rounded(workbench,.93,1.19,.045,2.48+i*.07,.88+i*.07,.94-i*.08,whiteMetal,.08);sheet.rotation.z=-.12+i*.04;}
+  label(workbench,'CSV',2.63,1.54,1.05,1.14,TEAL);icon(workbench,'check',2.57,.92,1.12,.52,TEAL);
+
   const senior=nodes.get('project:your-senior').group;
   const seniorMap=texture((ctx,text,card)=>{
-    card(0,0,1050,60,'#e0effc',0);text('YOUR SENIOR',29,41,27,BLUE,'700');text('DOCUMENT SEARCH',665,40,18,'#5182a4');
-    card(0,61,221,609,'#edf5fc',0);text('+ New chat',24,126,27,BLUE,'700');['Conversations','Documents','Source library'].forEach((v,i)=>text(v,24,205+i*55,22,'#5c7a91'));
-    text('Search documents',267,138,53,'#18324a','700');text('Ask a question',267,200,53,BLUE,'700');
+    card(0,0,1050,60,'#e0effc',0);text('YOUR SENIOR',29,41,27,BLUE,'700');text('SYNTHETIC EVIDENCE DEMO',665,40,18,'#5182a4');
+    card(0,61,221,609,'#edf5fc',0);text('Examples',24,126,27,BLUE,'700');['Questions','Documents','Source library'].forEach((v,i)=>text(v,24,205+i*55,22,'#5c7a91'));
+    text('Explore the sources',267,138,53,'#18324a','700');text('Read an example',267,200,53,BLUE,'700');
     card(387,252,617,75,'#126fdf');text('Summarize the design notes.',412,299,26,'#ffffff');
-    card(270,354,686,167,'#e7f4fc');text('Answer',294,397,29,'#164469','700');text('Source: Design notes.pdf · Passage 04',294,442,24,'#597992');card(293,467,232,34,'#c4e6f7');text('↗  View source',307,491,20,'#12609b','700');
-    card(268,553,736,72,'#f8fcff');text('Ask a question…',292,599,26,'#7591a7');card(930,562,59,55,BLUE);text('↑',947,601,31,'#fff','700');
+    card(270,354,686,167,'#e7f4fc');text('Example answer',294,397,29,'#164469','700');text('Source: Design notes.pdf · Passage 04',294,442,24,'#597992');card(293,467,232,34,'#c4e6f7');text('↗  View source',307,491,20,'#12609b','700');
+    card(268,553,736,72,'#f8fcff');text('Choose a sample question',292,599,26,'#7591a7');card(930,562,59,55,BLUE);text('→',944,601,31,'#fff','700');
   },1050,670);
   screen(senior,5.05,3.23,-.53,1.93,-.2,seniorMap,BLUE);box(senior,1.25,.12,.72,-.53,.18,0,silver);box(senior,.16,.5,.16,-.53,.45,-.38,silver);
   const sourceMap=texture((ctx,text,card)=>{text('SOURCE',23,52,29,BLUE,'700');text('Design notes.pdf',23,108,26,'#1b465e','700');for(let i=0;i<6;i++)card(24,146+i*27,245-(i%3)*30,7,i===2?'#53b9ee':'#b6d0e2',2);card(23,339,247,78,'#d9effa');text('Passage 04',39,385,25,'#146997','700');},300,440);
