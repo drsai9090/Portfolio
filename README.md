@@ -17,3 +17,12 @@ Use an HTTP server; opening index.html directly does not load JavaScript modules
 
 Profile and projects: content.js. Development stages: journey-content.js.
 Keep the licence and credit files in assets/.
+
+Run `node --test` (Node.js 24) to check project content and internal links.
+When publishing changes, refresh the version query in index.html and affected module imports so returning visitors receive the updated files.
+
+## Recent projects
+
+- Sugun Games: [play the four-game arcade](https://sugungames.vercel.app/) or [view source](https://github.com/Saisugun9090/sugun-games).
+- Reconciliation Workbench: [source and local run instructions](https://github.com/Saisugun9090/inception-workbench). Synthetic data; no public deployment.
+- Your Senior evidence demo: [source and local run instructions](https://github.com/Saisugun9090/interstellar-your-senior). Synthetic documents and prewritten demo answers; no public deployment.

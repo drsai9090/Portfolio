@@ -1,4 +1,4 @@
-import { profile, projects, stages, tourStages } from './journey-content.js';
+import { profile, projects, stages, tourStages } from './journey-content.js?v=projects-20260915';
 import { resolveRoute } from './routes.js?v=2b31b47';
 
 const main=document.querySelector('#main'), status=document.querySelector('#scene-status'), tourPanel=document.querySelector('#tour-panel');
@@ -38,13 +38,15 @@ function homeView() {
 function productArt(p) {
   let body='';
   if(p.id==='your-senior')body='<div class="mock-top"><i></i><i></i><i></i><b>your senior.</b><span>⌘</span></div><div class="mock-chat"><small>ASK YOUR DOCUMENTS</small><div class="mock-input">Search documents <b>↑</b></div><div class="mock-answer"><span>✦</span> Answer with source excerpts</div><div class="mock-sources"><span>↳ Source passage</span><span>↳ Document context</span></div></div>';
+  if(p.id==='sugun-games')body='<div class="mock-top"><i></i><i></i><i></i><b>sugun games / choose your game</b></div><div class="mock-arcade"><div><b>▦</b><span>Brick Garage</span></div><div><b>↻</b><span>Formula Club</span></div><div><b>◈</b><span>Echo Shift</span></div><div><b>▰</b><span>Pocket Snake</span></div></div>';
+  if(p.id==='inception-workbench')body='<div class="mock-top"><i></i><i></i><i></i><b>reconciliation / review queue</b></div><div class="mock-reconciliation"><div><span>TRANSACTION</span><span>INVOICE</span><span>REVIEW</span></div><div><b>Payment A</b><b>INV-001</b><em>Matched</em></div><div><b>Payment B</b><b>2 candidates</b><em class="needs-review">Check</em></div><div><b>Payment C</b><b>No match</b><em class="needs-review">Review</em></div><small>SYNTHETIC RECORDS · HUMAN REVIEW</small></div>';
   if(p.id==='ubuntu-tool')body='<div class="mock-top"><i></i><i></i><i></i><b>ubuntu / configuration</b></div><div class="mock-terminal"><span>Ubuntu configuration</span><p>config.yaml <em>→</em> apply <em>→</em> validate</p><div>✓ packages</div><div>✓ hostname & timezone</div><small>system state → JSON report</small></div>';
   if(p.id==='mindful-u')body='<div class="mock-top"><i></i><i></i><i></i><b>mindful-u / interface study</b></div><div class="mock-mindful"><span class="breathe-orbit">✳</span><div><small>ACTIVITIES</small><strong>Choose an activity</strong><div class="activity-pills"><span>Focus</span><span>Relax</span><span>Sleep</span></div></div></div>';
   if(p.id==='emotion-classifier')body='<div class="mock-top"><i></i><i></i><i></i><b>text / features / prediction</b></div><div class="mock-classifier"><span>Input text</span><div class="feature-pixels">▥ ▤ ▥ ▤ ▦ ▤ ▥</div><div class="emotion-labels"><span>joy</span><span>sadness</span><span>fear</span><span>surprise</span></div><small>Per-class evaluation</small></div>';
   return `<div class="project-art art-${p.id}" aria-hidden="true">${body}<span class="art-caption">Interface mockup</span></div>`;
 }
 function projectCard(p,compact=false) {
-  return `<a class="project-card ${compact?'compact':''}" href="#/project/${p.id}" data-project="${p.id}">${compact?`<span class="project-monogram" aria-hidden="true">${{'your-senior':'Y/S','ubuntu-tool':'>_','mindful-u':'m/u','emotion-classifier':'{x}'}[p.id]}</span>`:productArt(p)}<div class="project-card-copy"><small>${esc(p.category)}</small><h3>${esc(p.title)} ${arrow}</h3><p>${esc(p.summary)}</p>${compact?'':tags(p.stack)}</div></a>`;
+  return `<a class="project-card ${compact?'compact':''}" href="#/project/${p.id}" data-project="${p.id}">${compact?`<span class="project-monogram" aria-hidden="true">${{'sugun-games':'SG','inception-workbench':'R/W','your-senior':'Y/S','ubuntu-tool':'>_','mindful-u':'m/u','emotion-classifier':'{x}'}[p.id]}</span>`:productArt(p)}<div class="project-card-copy"><small>${esc(p.category)}</small><h3>${esc(p.title)} ${arrow}</h3><p>${esc(p.summary)}</p>${compact?'':tags(p.stack)}</div></a>`;
 }
 
 function projectsView() {
@@ -87,7 +89,7 @@ function projectView(p) {
   return `<article class="project-view project-exhibit-page" data-project-id="${esc(p.id)}">
     <header class="project-header" data-copy-scope>
       <div class="project-topline"><a class="back-link" href="#/projects">← Back to projects</a><p class="eyebrow">${esc(p.category)}</p></div>
-      <div class="project-heading-row"><div><h1>${esc(p.title)}</h1><p class="project-summary">${esc(p.summary)}</p></div><div class="project-actions">${external(p.repo,'View source','button primary')}<button type="button" class="button quiet" data-copy-project="${esc(p.id)}">Copy link <span aria-hidden="true">↗</span></button></div></div>
+      <div class="project-heading-row"><div><h1>${esc(p.title)}</h1><p class="project-summary">${esc(p.summary)}</p></div><div class="project-actions">${p.live?external(p.live,p.liveLabel||'Open app','button primary'):''}${external(p.repo,'View source',p.live?'button quiet':'button primary')}<button type="button" class="button quiet" data-copy-project="${esc(p.id)}">Copy link <span aria-hidden="true">↗</span></button></div></div>
       <span class="status-tag">${esc(p.status)}</span>
       ${copyFeedback()}
     </header>
@@ -144,7 +146,7 @@ function syncMotion() {
   if(!motion){tourPlaying=false;clearTourTimer();}
   updateTour();
 }
-import('./production-scene.js').then(async({mountProduction})=>{
+import('./production-scene.js?v=projects-20260915').then(async({mountProduction})=>{
   scene=await mountProduction(document.querySelector('#production-canvas'),{
     reducedMotion:!motion,
     onSelect:id=>{stopTour();location.hash=id==='projects'?'/projects':id.startsWith('project:')?'/project/'+id.slice(8):'/stage/'+id;},

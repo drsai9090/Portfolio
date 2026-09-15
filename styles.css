@@ -168,6 +168,19 @@ body[data-view=home] #scene-status{bottom:145px}
 /* Project evidence and practical actions stay readable outside the 3D exhibit. */
 body[data-view=projects] .scene-stage,body[data-view=about] .scene-stage,body[data-view=not-found] .scene-stage{visibility:hidden;opacity:0;pointer-events:none}
 .project-card-copy .tags{margin-top:18px;gap:6px}
+.art-sugun-games{background:linear-gradient(145deg,#e3e6f5,#d6efe5)}
+.mock-arcade{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;min-height:0;background:#101f34;padding:14px;border-radius:0 0 9px 9px}
+.mock-arcade>div{display:flex;align-items:center;gap:10px;padding:10px;border:1px solid #6c9eaa55;border-radius:7px;background:#20384b;color:#d4eee9}
+.mock-arcade b{font-size:27px;color:#81d9c0;line-height:1}
+.mock-arcade span{font-size:9px;line-height:1.4}
+.art-inception-workbench{background:linear-gradient(145deg,#d7e9fa,#e4f3ee)}
+.mock-reconciliation{flex:1;min-height:0;background:#f4faff;padding:15px 14px;border:1px solid #b0cfe3;border-top:0;border-radius:0 0 9px 9px}
+.mock-reconciliation>div{display:grid;grid-template-columns:1fr 1fr .8fr;gap:8px;align-items:center;min-height:32px;border-bottom:1px solid #d6e4ef}
+.mock-reconciliation span{font:6px var(--mono);color:#587c9b}
+.mock-reconciliation b{font-size:8px;font-weight:500;color:#254c6a}
+.mock-reconciliation em{font-size:7px;font-style:normal;color:#176e56;background:#d5eee4;padding:5px;border-radius:4px;text-align:center}
+.mock-reconciliation .needs-review{color:#8a5c14;background:#f7ecd2}
+.mock-reconciliation>small{display:block;margin-top:11px;font:6px var(--mono);color:#587c9b}
 .project-card-copy .tags span{font-size:10px;color:#325778}
 .project-context{display:grid;grid-template-columns:1.1fr 1fr;gap:35px;margin-top:20px;padding:24px;border:1px solid #fff;border-radius:13px;background:#edf5fd;pointer-events:auto}
 .project-context h2{font-size:19px;margin-bottom:12px}
